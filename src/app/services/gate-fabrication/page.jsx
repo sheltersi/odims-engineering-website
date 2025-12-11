@@ -11,10 +11,16 @@ import {
   Wrench
 } from "lucide-react";
 
+import Section from "@/components/Section";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 export default function GateFabricationPage() {
     const fadeIn = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const blockFade = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 }
 };
@@ -52,6 +58,13 @@ export default function GateFabricationPage() {
 
           {/* LEFT COLUMN */}
           <div className="space-y-8">
+    <motion.div
+      variants={blockFade}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
             <ServiceBlock
               icon={PenTool}
               title="Custom Gate Design"
@@ -63,7 +76,15 @@ export default function GateFabricationPage() {
                 "Professional measurements"
               ]}
             />
-
+    </motion.div>
+    
+     <motion.div
+      variants={blockFade}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
             <ServiceBlock
               icon={Hammer}
               title="Full Gate Fabrication"
@@ -75,7 +96,15 @@ export default function GateFabricationPage() {
                 "Weather-resistant finishing"
               ]}
             />
+    </motion.div>
 
+      <motion.div
+      variants={blockFade}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
             <ServiceBlock
               icon={Layers}
               title="Sliding & Swing Gates"
@@ -87,11 +116,18 @@ export default function GateFabricationPage() {
                 "Custom size options"
               ]}
             />
+            </motion.div>
           </div>
 
           {/* RIGHT COLUMN */}
           <div className="space-y-8">
-
+              <motion.div
+      variants={blockFade}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
             <ServiceBlock
               icon={Shield}
               title="Privacy & Decorative Gates"
@@ -102,8 +138,15 @@ export default function GateFabricationPage() {
                 "Solid panel construction",
                 "Noise-dampened designs"
               ]}
-            />
+            /></motion.div>
 
+      <motion.div
+      variants={blockFade}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
             <ServiceBlock
               icon={Cog}
               title="Gate Hardware Installation"
@@ -114,8 +157,15 @@ export default function GateFabricationPage() {
                 "Gate stoppers",
                 "Smooth sliding mechanisms"
               ]}
-            />
+            /></motion.div>
 
+ <motion.div
+      variants={blockFade}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
             <ServiceBlock
               icon={Wrench}
               title="Repairs, Upgrades & Restoration"
@@ -126,11 +176,19 @@ export default function GateFabricationPage() {
                 "Upgrading old gates",
                 "On-site welding modifications"
               ]}
-            />
+            /></motion.div>
           </div>
         </div>
-
+  </section>
         {/* CALL TO ACTION */}
+        <Section className="bg-slate-100">
+         <motion.div
+      variants={blockFade}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
         <div className="text-center mt-20">
           <h3 className="text-2xl font-semibold text-gray-800">
             Ready to Upgrade Your Gate?
@@ -146,8 +204,9 @@ export default function GateFabricationPage() {
           >
             Contact Us for a Free Quote
           </a>
-        </div>
-      </section>
+        </div></motion.div>
+        </Section>
+    
       <WhatsAppButton />
     </main>
   );
