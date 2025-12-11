@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
   BadgeCheck,
   Cog,
@@ -10,12 +11,19 @@ import {
   Wrench
 } from "lucide-react";
 
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+
 export default function GateFabricationPage() {
+    const fadeIn = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 }
+};
+
   return (
     <main className="bg-gray-50">
 
       {/* HERO SECTION */}
-      <section className="relative bg-[url('/images/gate-hero.jpg')] bg-cover bg-center bg-no-repeat h-[45vh] flex items-center">
+      <section className="relative bg-[url('/assets/img/gate-img.jpg')] bg-cover bg-center bg-no-repeat h-[45vh] flex items-center">
         <div className="absolute inset-0 bg-black/60"></div>
 
         <div className="relative max-w-5xl mx-auto px-6 text-center">
@@ -30,10 +38,15 @@ export default function GateFabricationPage() {
 
       {/* CONTENT SECTION */}
       <section className="max-w-6xl mx-auto px-6 py-16">
-
-        <h2 className="text-3xl font-bold text-gray-800 mb-8">
-          What’s Included in Our Gate Fabrication Service
-        </h2>
+ <motion.h2
+    className="text-3xl font-bold text-gray-800 mb-8"
+    initial="hidden"
+    animate="visible"
+    variants={fadeIn}
+    transition={{ duration: 0.6 }}
+  >
+    What’s Included in Our Gate Fabrication Service
+  </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-12">
 
@@ -135,6 +148,7 @@ export default function GateFabricationPage() {
           </a>
         </div>
       </section>
+      <WhatsAppButton />
     </main>
   );
 }

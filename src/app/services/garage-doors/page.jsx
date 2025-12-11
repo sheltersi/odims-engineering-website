@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 import Button from "@/components/Button";
 import Section from "@/components/Section";
 
