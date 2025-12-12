@@ -55,21 +55,28 @@ export default function ReviewsPage() {
       {/* Background abstract shapes */}
       <div className="absolute top-0 left-10 w-80 h-80 bg-blue-300/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
+      
+      <div className="absolute w-40 h-40 md:left-120 left-20 bg-blue-300/20 rotate-45"></div>
+      <div className="absolute w-40 h-40 md:left-160 left-55 bg-blue-300/20 rotate-45"></div>
+      <div className="absolute w-40 h-40 md:left-200 left-95 bg-blue-300/20 rotate-45"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
 
         {/* HEADER */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900">
-            Customer Reviews
+  <div className="text-center mb-12 pb-12">
+          <h1 className="text-4xl md:text-5xl font-bold font-mono text-blue-900">
+            Customer <span className="text-[#59A5D8]">Reviews</span>
           </h1>
-          <p className="text-blue-700 mt-4 text-lg">
-            See what our clients say about our service and workmanship.
-          </p>
-        </div>
+
+  <div className="max-w-2xl mx-auto">
+    <p className="text-center text-[#6E7A85] mt-4 font-mono text-lg">
+      See what our clients say about our service and workmanship.
+    </p>
+  </div>
+</div>
 
         {/* REVIEWS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:mt-4">
           {reviews.map((review, index) => (
             <div
               key={index}

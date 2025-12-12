@@ -23,19 +23,19 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-white mb-2">Contact</h4>
             <div className="flex items-center gap-2">
-                <div className="bg-[#F97316] text-white p-2 rounded-full">
+                <div className="bg-[#84D2F6] text-white p-2 rounded-full">
                   <FontAwesomeIcon icon={faPhone} />
                 </div>
                   <p className="">+27 81 071 3204</p>
               </div>
               <div className="flex items-center gap-2 mt-2">
-                <div className="bg-[#F97316] text-white p-2 rounded-full">
+                <div className="bg-[#84D2F6] text-white p-2 rounded-full">
                   <FontAwesomeIcon icon={faEnvelope} />
                 </div>
                   <p className=""> info@odimsengineering.co.za</p>
               </div>
                 <div className="flex items-center gap-2 mt-2">
-                <div className="bg-[#F97316] text-white p-2 rounded-full">
+                <div className="bg-[#84D2F6] text-white p-2 rounded-full">
                   <FontAwesomeIcon icon={faLocationDot} />
                 </div>
                  <p> 4 Heelra Rd, Raumaraispark, Johannesburg 2090, South Africa

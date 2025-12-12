@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="hero-fade-slider absolute inset-0 z-0">
 
   {[
-    "/assets/img/engineering-image.jpg",
+    "/assets/img/welding-workshop.png",
     "/assets/img/gate-img.jpg",
     "/assets/img/gate-motor.jpeg",
     "/assets/img/gate-on-the-ground.jpg",
@@ -63,7 +63,7 @@ export default function Hero() {
                 Gate stuck open, remote not working or garage door jammed? Send us a WhatsApp with a
                 photo and we’ll respond as soon as possible.
               </p>
-              <a href="https://wa.me/27XXXXXXXXX" className="btn btn-primary text-sm">
+              <a href="https://wa.me/27810713204" className="btn btn-primary text-sm">
                 WhatsApp Now
               </a>
             </div>

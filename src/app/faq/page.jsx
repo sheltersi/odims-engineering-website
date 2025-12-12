@@ -51,18 +51,25 @@ export default function FAQPage() {
       {/* Background abstract shapes */}
       <div className="absolute top-0 left-20 w-72 h-72 bg-blue-300/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-2xl"></div>
+   
+   <div className="absolute w-40 h-40 md:left-120 left-20 bg-blue-300/20 rotate-45"></div>
+      <div className="absolute w-40 h-40 md:left-160 left-55 bg-blue-300/20 rotate-45"></div>
+      <div className="absolute w-40 h-40 md:left-200 left-95 bg-blue-300/20 rotate-45"></div>
 
       <div className="max-w-4xl mx-auto relative z-10">
 
         {/* HEADER */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900">
-            Frequently Asked Questions
+          <div className="text-center mb-12 pb-12">
+          <h1 className="text-4xl md:text-5xl font-bold font-mono text-blue-900">
+            Frequently Asked <span className="text-[#59A5D8]">Questions</span>
           </h1>
-          <p className="text-blue-700 mt-4 text-lg">
+
+  <div className="max-w-2xl mx-auto">
+    <p className="text-center text-[#6E7A85] mt-4 font-mono text-lg">
             Find quick answers to the most common questions from our customers.
-          </p>
-        </div>
+    </p>
+  </div>
+</div>
 
         {/* FAQ ACCORDION */}
         <div className="space-y-4">

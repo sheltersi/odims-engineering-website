@@ -12,17 +12,26 @@ export default function ContactPage() {
       <div className="absolute top-10 left-20 w-80 h-80 bg-blue-300/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-2xl"></div>
 
+   <div className="absolute w-40 h-40 md:left-120 left-20 bg-blue-300/20 rotate-45"></div>
+      <div className="absolute w-40 h-40 md:left-160 left-55 bg-blue-300/20 rotate-45"></div>
+      <div className="absolute w-40 h-40 md:left-200 left-95 bg-blue-300/20 rotate-45"></div>
+
+
       <div className="max-w-6xl mx-auto relative z-10">
 
         {/* HEADER */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900">
-            Contact Us
+        <div className="text-center mb-12 pb-12">
+          <h1 className="text-4xl md:text-5xl font-bold font-mono text-blue-900">
+            Contact <span className="text-[#59A5D8]">Us</span>
           </h1>
-          <p className="text-blue-700 mt-4 text-lg">
-            We're here to help. Reach out anytime.
-          </p>
-        </div>
+
+  <div className="max-w-2xl mx-auto">
+    <p className="text-center text-[#6E7A85] mt-4 font-mono text-lg">
+             We are here to help. Reach out anytime.
+    </p>
+  </div>
+</div>
+
 
         {/* MAIN GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -35,41 +44,41 @@ export default function ContactPage() {
 
               {/* Phone */}
               <div className="flex items-center gap-4">
-                <div className="bg-blue-600 text-white p-3 rounded-full">
+                <div className="bg-[#84D2F6] text-white p-3 rounded-full">
                   <FontAwesomeIcon icon={faPhone} />
                 </div>
                 <div>
                   <p className="font-semibold text-blue-900">Phone Number</p>
-                  <p className="text-blue-700">+27 68 000 0000</p>
+                  <p className="text-[#6E7A85]">+27 81 071 3204</p>
                 </div>
               </div>
 
               {/* Email */}
               <div className="flex items-center gap-4">
-                <div className="bg-blue-600 text-white p-3 rounded-full">
+                <div className="bg-[#84D2F6] text-white p-3 rounded-full">
                   <FontAwesomeIcon icon={faEnvelope} />
                 </div>
                 <div>
                   <p className="font-semibold text-blue-900">Email Address</p>
-                  <p className="text-blue-700">info@yourbusiness.co.za</p>
+                  <p className="text-[#6E7A85]">info@odims.co.za</p>
                 </div>
               </div>
 
               {/* Location */}
               <div className="flex items-center gap-4">
-                <div className="bg-blue-600 text-white p-3 rounded-full">
+                <div className="bg-[#84D2F6] text-white p-3 rounded-full">
                   <FontAwesomeIcon icon={faLocationDot} />
                 </div>
                 <div>
                   <p className="font-semibold text-blue-900">Our Location</p>
-                  <p className="text-blue-700">Johannesburg, South Africa</p>
+                  <p className="text-[#6E7A85]">Johannesburg, South Africa</p>
                 </div>
               </div>
 
             </div>
 
             {/* Small Message */}
-            <p className="text-blue-700 text-sm mt-10">
+            <p className="text-[#6E7A85] text-sm mt-10">
               Our team replies within 1–12 hours. For urgent help, please call us directly.
             </p>
           </div>
@@ -123,7 +132,7 @@ export default function ContactPage() {
               {/* BUTTON */}
               <button
                 type="submit"
-                className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all shadow-md"
+                className="w-full py-4 bg-[#84D2F6] hover:bg-blue-700 text-white font-semibold rounded-xl transition-all shadow-md"
               >
                 Send Message
               </button>
