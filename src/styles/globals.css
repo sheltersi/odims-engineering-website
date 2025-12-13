@@ -213,3 +213,7 @@ body {
   break-inside: avoid;
 }
 
+h2{
+  font-family: LeHavre, monospace;
+}
+
