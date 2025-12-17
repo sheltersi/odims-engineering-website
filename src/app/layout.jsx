@@ -11,7 +11,10 @@ import Providers from "@/components/Providers";
 // import "@/styles/custom-styles.css";
 
 export const metadata = {
-  title: "ODIMS Welding & Automation",
+  title:{
+    default:  "ODIMS Welding & Automation",
+    template: "%s | ProGate Welding & Automation",
+  },
   description: "Gate Motors • Remote Coding • Welding • Garage Doors",
 };
 
