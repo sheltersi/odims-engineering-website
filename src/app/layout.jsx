@@ -15,6 +15,11 @@ export const metadata = {
     default:  "ODIMS Welding & Automation",
     template: "%s | ODIMS Welding & Automation",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16", type: "image/png" },
+    ],
+  },
   description: "Gate Motors • Remote Coding • Welding • Garage Doors",
 };
 

@@ -26,8 +26,8 @@ export default function Header() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-xl bg-brand.blue text-white flex items-center justify-center text-sm font-bold">
-            PG
+          <div className="h-16 w-16 rounded-xl bg-brand.blue text-white flex items-center justify-center text-sm font-bold">
+            <img src="assets/img/favicon.png" alt="icon" className="w-16 h-16" />
           </div>
 
           <div className="leading-tight">
