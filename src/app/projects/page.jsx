@@ -14,7 +14,7 @@ const projects = [
   },
   {
     title: "Solar Gate Motor Installation",
-    images: ["/assets/projects/fencing/work-1.png","/assets/img/gate-2.jpg","/assets/img/gate-on-the-ground.jpg",],
+    images: ["/assets/projects/solar-gate-motor/work-1.png","/assets/projects/solar-gate-motor/work-2.png"],
     location: "Pretoria",
     category: "Gate Motor",
     description:
@@ -30,7 +30,7 @@ const projects = [
   },
   {
     title: "Burglar Proofing & Security Bars",
-    images: ["/projects/burglarproof.jpg"],
+    images: ["/assets/projects/burglar/work-1.png","/assets/projects/burglar/work-2.png"],
     location: "Soweto",
     category: "Welding",
     description:

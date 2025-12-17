@@ -74,7 +74,7 @@ export default function PricingSection() {
 <div className="absolute w-40 h-40 md:left-120 left-20 bg-blue-300/20 rotate-45"></div>
 <div className="absolute w-40 h-40 md:left-160 left-55 bg-blue-300/20 rotate-45"></div>
 <div className="absolute w-40 h-40 md:left-200 left-95 bg-blue-300/20 rotate-45"></div>
-
+     
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Header */}

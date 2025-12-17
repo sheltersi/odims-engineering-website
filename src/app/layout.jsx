@@ -4,11 +4,13 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import "./fontawesome"; // <-- the config file you created above
 
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Providers from "@/components/Providers";
 
 // import "@/styles/custom-styles.css";
-
 
 export const metadata = {
   title: "ProGate Welding & Automation",
@@ -20,9 +22,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <div className="app-root">
-          <Header />
-          <main className="main-content">{children}</main>
-          <Footer />
+          <Providers>
+            <Header />
+            <main className="main-content">{children}</main>
+            <Footer />
+          </Providers>
         </div>
       </body>
     </html>

@@ -7,7 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Footer() {
   return (
     <footer className="bg-[#091540] text-slate-300 mt-12">
+     <div className="absolute rotate-120 bottom-0 top-5 w-22 h-50 bg-blue-400/10 rounded-full"></div>
+      <div className="absolute rotate-120 md:right-320 right-96 -bottom-101 w-22 h-120 bg-blue-400/10 rounded-full"></div>
+      <div className="absolute rotate-120 md:right-320 right-96 -bottom-130 w-22 h-120 bg-blue-400/10 rounded-full"></div>
+
       <div className="container py-8 grid gap-6 md:grid-cols-4 text-sm">
+     <div className="absolute rotate-120 right-10 w-22 h-70 bg-blue-400/10 rounded-full"></div>
+     <div className="absolute rotate-120 -bottom-10 right-10 w-22 h-70 bg-blue-400/10 rounded-full"></div>
+        
         <div>
           <h3 className="font-semibold text-white mb-2">ODims Welding & Automation</h3>
           <p>Strong steel. Smart access. Welding, gate motors, remotes and garage doors.</p>
@@ -68,12 +75,12 @@ export default function Footer() {
       © {new Date().getFullYear()} ODims Welding & Automation. All rights reserved.
     </div>
 <div>
- Designed and developed by <span><a href="https://sheltersibanda.com/">Shelter</a></span>
+ Designed and developed by <span><a href="https://sheltersibanda.com/" className="text-[#ABD2FA]">Shelter</a></span>
 </div>
     <div className="flex items-center gap-2 justify-center md:justify-end md:text-right">
-      <FontAwesomeIcon icon={faSquareLinkedin} />
-      <FontAwesomeIcon icon={faFacebook} />
-      <FontAwesomeIcon icon={faTwitterSquare} />
+      <FontAwesomeIcon className="text-lg text-[#ABD2FA]" icon={faSquareLinkedin} />
+      <FontAwesomeIcon className="text-lg text-[#ABD2FA]" icon={faFacebook} />
+      <FontAwesomeIcon className="text-lg text-[#ABD2FA]" icon={faTwitterSquare} />
     </div>
 
   </div>

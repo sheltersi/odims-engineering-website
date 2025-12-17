@@ -22,6 +22,22 @@ export async function POST(req) {
       `,
     });
 
+     // AUTO-REPLY TO CUSTOMER
+    await resend.emails.send({
+      from: "ODiMs Welding & Automation <noreply@ebershel.com>",
+      to: [email],
+      subject: "We’ve received your request",
+      html: `
+        <p>Hi ${name},</p>
+        <p>Thank you for contacting <strong>ODiMs Welding & Automation</strong>.</p>
+        <p>We’ve received your request for <strong>${service}</strong> and will contact you shortly.</p>
+        <p>If urgent, you can call us directly.</p>
+        <br/>
+         <p>— Best Regards</p>
+        <p>— ODiMs Team</p>
+      `,
+    });
+
     return Response.json({ success: true });
   } catch (error) {
     return Response.json({ error }, { status: 500 });

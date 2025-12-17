@@ -32,126 +32,138 @@ export default function ContactPage() {
   const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (loading) return;
+    if (loading) return;
 
-  const form = e.target;
-  const formData = new FormData(form);
+    const form = e.target;
+    const formData = new FormData(form);
 
-  const payload = {
-    name: formData.get("name")?.trim(),
-    email: formData.get("email")?.trim(),
-    phone: formData.get("phone")?.trim(),
-    service: formData.get("service"),
-    message: formData.get("message")?.trim(),
-  };
+    const payload = {
+      name: formData.get("name")?.trim(),
+      email: formData.get("email")?.trim(),
+      phone: formData.get("phone")?.trim(),
+      service: formData.get("service"),
+      message: formData.get("message")?.trim(),
+      file_url: null, // we will fill this if a file exists
 
-  // -----------------------
-  // CLIENT-SIDE VALIDATION
-  // -----------------------
+    };
 
-  if (!payload.name || !payload.email || !payload.service || !payload.message) {
-    Swal.fire({
-      icon: "warning",
-      title: "Missing information",
-      text: "Please fill in all required fields.",
-    });
-    return;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(payload.email)) {
-    Swal.fire({
-      icon: "error",
-      title: "Invalid email",
-      text: "Please enter a valid email address.",
-    });
-    return;
-  }
-
-  try {
-    setLoading(true);
+    
 
     // -----------------------
-    // SAVE TO SUPABASE
+    // CLIENT-SIDE VALIDATION
     // -----------------------
-    const { error } = await supabase
-      .from("contact_requests")
-      .insert([payload]);
 
-    if (error) {
-      throw new Error("Database error");
+    if (
+      !payload.name ||
+      !payload.email ||
+      !payload.service ||
+      !payload.message
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Missing information",
+        text: "Please fill in all required fields.",
+      });
+      return;
     }
 
-    // -----------------------
-    // SEND EMAIL (SERVER)
-    // -----------------------
-    const emailRes = await fetch("/api/send-contact-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!emailRes.ok) {
-      throw new Error("Email failed");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(payload.email)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid email",
+        text: "Please enter a valid email address.",
+      });
+      return;
     }
 
-    // -----------------------
-    // SUCCESS FEEDBACK
-    // -----------------------
-    Swal.fire({
-      icon: "success",
-      title: "Message sent!",
-      text: "Thank you for contacting us. We’ll get back to you shortly.",
-      confirmButtonColor: "#2563eb",
-    });
+    try {
+      setLoading(true);
 
-    form.reset();
-  } catch (err) {
-    Swal.fire({
-      icon: "error",
-      title: "Something went wrong",
-      text: "Please try again later or contact us directly.",
-    });
-  } finally {
-    setLoading(false);
+      // -----------------------
+    // File upload code
+    // -----------------------
+
+    const file = formData.get("attachment");
+
+    if (file && file.size > 0) {
+      const fileName = `${Date.now()}-${file.name}`;
+
+      const { data, error: uploadError } = await supabase.storage
+        .from("contact-uploads")
+        .upload(fileName, file);
+
+      if (uploadError) {
+        throw new Error("File upload failed");
+      }
+
+      // Save file path to payload
+      payload.file_url = data.path;
+    }
+
+      // -----------------------
+      // SAVE TO SUPABASE
+      // -----------------------
+      const { error } = await supabase
+        .from("contact_requests")
+        .insert([payload]);
+
+      if (error) {
+        throw new Error("Database error");
+      }
+
+      // -----------------------
+      // SEND EMAIL (SERVER)
+      // -----------------------
+      const emailRes = await fetch("/api/send-contact-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!emailRes.ok) {
+        throw new Error("Email failed");
+      }
+
+      // -----------------------
+      // SUCCESS FEEDBACK
+      // -----------------------
+      // Swal.fire({
+      //   icon: "success",
+      //   title: "Message sent!",
+      //   text: "Thank you for contacting us. We’ll get back to you shortly.",
+      //   confirmButtonColor: "#2563eb",
+      // });
+
+      Swal.fire({
+        icon: "success",
+        title: "Message sent!",
+        text: "Would you like to continue on WhatsApp?",
+        showCancelButton: true,
+        confirmButtonText: "Open WhatsApp",
+        cancelButtonText: "Close",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.open(
+            `https://wa.me/27810713204?text=Hi%20ODiMs,%20I%20just%20sent%20a%20request%20for%20${payload.service}`,
+            "_blank"
+          );
+        }
+      });
+
+      form.reset();
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong",
+        text: "Please try again later or contact us directly.",
+      });
+    } finally {
+      setLoading(false);
+    }
   }
-}
-
-
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   setLoading(true);
-
-  //   const formData = new FormData(e.target);
-
-  //   const payload = {
-  //     name: formData.get("name"),
-  //     email: formData.get("email"),
-  //     phone: formData.get("phone"),
-  //     service: formData.get("service"),
-  //     message: formData.get("message"),
-  //   };
-
-  //   // Save to Supabase
-  //   const { error } = await supabase.from("contact_requests").insert([payload]);
-  //   if (error) {
-  //     alert("Something went wrong");
-  //   } else {
-  //     alert("Message sent successfully!");
-  //   }
-  //   // Call API route for email notification
-  //   await fetch("/api/send-contact-email", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(payload),
-  //   });
-
-  //   setLoading(false);
-  //   setSuccess(true);
-  //   e.target.reset();
-  // }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-16 relative overflow-hidden">
@@ -248,25 +260,6 @@ export default function ContactPage() {
                 />
               </div>
 
-              <div>
-                <label className="block font-medium text-blue-900 mb-1">
-                  Service Required
-                </label>
-
-                <select
-                  name="service"
-                  required
-                  className="w-full rounded-lg border border-blue-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Select a service</option>
-                  {services.map((service) => (
-                    <option key={service} value={service}>
-                      {service}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
               {/* Email */}
               <div>
                 <label className="block font-medium text-blue-900 mb-1">
@@ -295,6 +288,39 @@ export default function ContactPage() {
                 />
               </div>
 
+              {/* service */}
+              <div>
+                <label className="block font-medium text-blue-900 mb-1">
+                  Service Required
+                </label>
+
+                <select
+                  name="service"
+                  required
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Select a service</option>
+                  {services.map((service) => (
+                    <option key={service} value={service}>
+                      {service}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* image upload */}
+              <div>
+                <label className="block font-medium text-blue-900 mb-1">
+                  Upload Image (optional)
+                </label>
+                <input
+                  type="file"
+                  name="attachment"
+                  accept="image/*"
+                  className="w-full text-sm rounded-lg border border-blue-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
               {/* Message */}
               <div>
                 <label className="block font-medium text-blue-900 mb-1">
@@ -313,14 +339,14 @@ export default function ContactPage() {
                 type="submit"
                 disabled={loading}
                 className={`w-full py-4 font-semibold rounded-xl transition-all shadow-md
-    ${
-      loading
-        ? "bg-blue-400 cursor-not-allowed"
-        : "bg-[#84D2F6] hover:bg-blue-700"
-    }
-    text-white
-  `}
-              >
+                            ${
+                              loading
+                                ? "bg-blue-400 cursor-not-allowed"
+                                : "bg-[#84D2F6] hover:bg-blue-700"
+                            }
+                            text-white
+                          `}
+                    >
                 {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
