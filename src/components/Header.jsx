@@ -21,7 +21,9 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="bg-[#E0E1E9] border-b border-slate-400 sticky top-0 z-50">
+    // <header className="bg-[#E0E1E9] border-b border-slate-400 sticky top-0 z-50">
+    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-slate-200 shadow-sm">
+
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between py-4 gap-6">
 
         {/* Logo */}
@@ -86,7 +88,8 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden bg-[#E0E1E9] border-t border-slate-300 px-4 pb-4 absolute left-0 right-0 top-full">
+<div className="md:hidden bg-white/90 backdrop-blur-md border-t border-slate-200 px-4 pb-4 absolute left-0 right-0 top-full shadow-sm">
+
           <nav className="flex flex-col gap-4 text-sm text-slate-700 py-4">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -98,7 +101,7 @@ export default function Header() {
                   onClick={() => setOpen(false)}
                   className={`py-2 ps-4 rounded-3xl ms-3 transition ${
                     isActive
-                      ? "bg-brand.blue text-white"
+                      ? "bg-brand.blue text-blue-500"
                       : "text-black hover:bg-[#ABD2FA]"
                   }`}
                 >
@@ -109,7 +112,7 @@ export default function Header() {
 
             {/* Call button on mobile */}
             <a
-              href="tel:+27XXXXXXXXX"
+              href="tel:+27810723204"
               className="btn btn-primary text-xs w-fit mt-2"
             >
               Call / WhatsApp
