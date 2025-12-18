@@ -143,11 +143,12 @@ export default function ContactPage() {
         text: "Would you like to continue on WhatsApp?",
         showCancelButton: true,
         confirmButtonText: "Open WhatsApp",
+        confirmButtonColor: "#104911",
         cancelButtonText: "Close",
       }).then((result) => {
         if (result.isConfirmed) {
           window.open(
-            `https://wa.me/27810713204?text=Hi%20ODiMs,%20I%20just%20sent%20a%20request%20for%20${payload.service}`,
+            `https://wa.me/27810713204?text=Hi%20ODiMs%20Team,%20I%20just%20sent%20a%20request%20for%20${payload.service}`,
             "_blank"
           );
         }

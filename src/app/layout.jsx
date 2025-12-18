@@ -20,9 +20,8 @@ export const metadata = {
       { url: "/favicon.ico", sizes: "16x16", type: "image/png" },
     ],
   },
-  description: "Gate Motors • Remote Coding • Welding • Garage Doors",
+  description: "ODiMs Welding & Automation offers professional welding, gate motor repairs, automated gates,steel fabrication services, remote coding, garage doors repairs & installation",
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

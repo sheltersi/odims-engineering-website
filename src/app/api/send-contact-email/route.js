@@ -1,5 +1,7 @@
 import { Resend } from "resend";
 
+import { emailFooter } from "@/data/emailFooter";
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
@@ -9,7 +11,7 @@ export async function POST(req) {
 
   try {
     await resend.emails.send({
-      from: "ODiMs Website <noreply@mail.ebershel.com>",
+      from: "Odims Website <noreply@mail.odims.co.za>",
       to: ["sheltersibanda002@gmail.com"],
       subject: `New Contact Request: ${service}`,
       html: `
@@ -24,7 +26,7 @@ export async function POST(req) {
 
      // AUTO-REPLY TO CUSTOMER
     await resend.emails.send({
-      from: "ODiMs Welding & Automation <noreply@ebershel.com>",
+      from: "ODiMs Welding & Automation <noreply@mail.odims.co.za>",
       to: [email],
       subject: "We’ve received your request",
       html: `
@@ -35,6 +37,8 @@ export async function POST(req) {
         <br/>
          <p>— Best Regards</p>
         <p>— ODiMs Team</p>
+
+         ${emailFooter()}
       `,
     });
 
