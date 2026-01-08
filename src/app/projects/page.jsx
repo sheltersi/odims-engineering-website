@@ -3,6 +3,8 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+
 const projects = [
   {
     title: "Custom Sliding Gate Fabrication",
@@ -266,6 +268,7 @@ function ProjectCard({ project, setSelectedImage }) {
           View Details →
         </a>
       </div>
+      <WhatsAppButton />
     </div>
   );
 }

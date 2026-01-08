@@ -4,6 +4,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 import ServicesMap from "@/components/ServicesAreaMap";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { supabase } from "@/lib/supabaseClient";
 import {
   faEnvelope,
@@ -372,6 +373,7 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+      <WhatsAppButton />
     </div>
   );
 }

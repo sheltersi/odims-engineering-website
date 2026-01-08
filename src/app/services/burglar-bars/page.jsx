@@ -239,6 +239,7 @@ function ServiceBlock({ icon: Icon, title, items }) {
           <li key={i}>• {item}</li>
         ))}
       </ul>
+      <WhatsAppButton />
     </div>
   );
 }

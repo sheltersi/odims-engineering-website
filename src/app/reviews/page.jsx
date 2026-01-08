@@ -1,5 +1,6 @@
 "use client";
 
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -135,6 +136,7 @@ export default function ReviewsPage() {
         </div>
 
       </div>
+      <WhatsAppButton />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+
 export default function TermsOfServicePage() {
   const lastUpdated = "January 8, 2026"; 
 
@@ -205,6 +207,7 @@ export default function TermsOfServicePage() {
           </aside>
         </div>
       </div>
+      <WhatsAppButton />
     </main>
   );
 }

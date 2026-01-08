@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+
 const blogPosts = [
   {
     id: 1,
@@ -88,6 +90,8 @@ export default function BlogPage() {
           ))}
         </div>
       </div>
+      <WhatsAppButton />
     </section>
+    
   );
 }

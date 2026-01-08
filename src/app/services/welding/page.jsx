@@ -12,6 +12,8 @@ import {
   Wrench
 } from "lucide-react";
 
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 }
@@ -249,27 +251,5 @@ function ServiceBlock({ icon: Icon, title, items }) {
         ))}
       </ul>
     </div>
-  );
-}
-
-
-
-// WhatsApp Floating Button
-function WhatsAppButton() {
-  return (
-    <a
-      href="https://wa.me/27XXXXXXXXX"
-      target="_blank"
-      className="fixed bottom-6 right-6 bg-green-500 text-white rounded-full p-4 shadow-xl hover:bg-green-600 transition"
-    >
-      <svg 
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path d="M20.52 3.48A11.77 11.77 0 0 0 12.07.25C5.67.25.48 5.44.48 11.86a11.8 11.8 0 0 0 1.69 6.07L.25 23.75l6-1.87a11.86 11.86 0 0 0 5.82 1.48h.05c6.41 0 11.6-5.19 11.6-11.6a11.54 11.54 0 0 0-3.2-8.28z"/>
-      </svg>
-    </a>
   );
 }

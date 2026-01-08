@@ -1,5 +1,7 @@
 import React from "react";
 
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+
 export default function PrivacyPolicyPage() {
   const lastUpdated = "January 8, 2026"; // change if needed
 
@@ -227,6 +229,7 @@ export default function PrivacyPolicyPage() {
           </aside>
         </div>
       </div>
+      <WhatsAppButton />
     </main>
   );
 }
