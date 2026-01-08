@@ -49,17 +49,6 @@ export default function Footer() {
                 </p>
               </div>
                <div className="relative mt-2">
-  <input
-    type="email"
-    placeholder="Enter your email"
-    className="peer mt-2 w-full px-4 py-3 pr-12 rounded-xl border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#F97316]"
-  />
-   
-  <button 
-    className="absolute rounded-full right-0 top-1/2 -translate-y-1/2 text-white peer-focus:text-black"
-  >
-    <FontAwesomeIcon className="p-2 text-[#ABD2FA] text-2xl" icon={faCircleArrowRight} />
-  </button>
 </div>
 
         </div>
@@ -68,23 +57,29 @@ export default function Footer() {
             <p>Gauteng, North West, Mphumalanga and Sorrounding Areas</p>
         </div>
       </div>
-     <div className="border-t border-slate-700 text-xs text-center py-3 text-slate-500">
-  <div className="container py-8 grid gap-6 md:grid-cols-4 text-sm items-center">
-    
-    <div className="md:col-span-2">
-      © {new Date().getFullYear()} ODims Welding & Automation. All rights reserved.
-    </div>
-<div>
- Designed and developed by <span><a href="https://sheltersibanda.com/" className="text-[#ABD2FA]">Shelter</a></span>
-</div>
-    <div className="flex items-center gap-2 justify-center md:justify-end md:text-right">
-      <FontAwesomeIcon className="text-lg text-[#ABD2FA]" icon={faSquareLinkedin} />
-      <FontAwesomeIcon className="text-lg text-[#ABD2FA]" icon={faFacebook} />
-      <FontAwesomeIcon className="text-lg text-[#ABD2FA]" icon={faTwitterSquare} />
-    </div>
+  
 
-  </div>
-</div>
+  {/* Bottom */}
+        <div className="md:mx-36 mt-16 mb-10 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+      
+          <p className="text-gray-500 text-sm">
+  © {new Date().getFullYear()} Odims Welding & Automation. All rights reserved. </p> 
+  <p className="text-gray-500 text-sm">Designed & Developed By{" "}
+  <a
+    href="https://sheltersibanda.com/"
+    className="text-sky-500"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Shelter
+  </a>
+</p>
+
+          <div className="flex gap-6 text-sm">
+            <Link href="/privacy-policy" className="text-gray-500 hover:text-sky-500 transition-colors">Privacy Policy</Link>
+            <a href="/terms-of-service" className="text-gray-500 hover:text-sky-500 transition-colors">Terms of Service</a>
+          </div>
+        </div>
 
     </footer>
   );

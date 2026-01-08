@@ -92,7 +92,7 @@ export default function FAQPage() {
 
               {/* Answer */}
               {openIndex === index && (
-                <p className="mt-3 text-blue-700 leading-relaxed">
+                <p className="mt-3 text-gray-500 leading-relaxed">
                   {faq.answer}
                 </p>
               )}
