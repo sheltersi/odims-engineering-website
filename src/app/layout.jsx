@@ -8,6 +8,7 @@ import AnalyticsLoader from "@/components/AnalyticsLoader";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Providers from "@/components/Providers";
+import { Analytics } from "@vercel/analytics/next"
 
 // import "@/styles/custom-styles.css";
 
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+      <Analytics />
       <AnalyticsLoader />
         <div className="app-root">
           <Providers>

@@ -61,7 +61,7 @@ export default function Header() {
 
         {/* Call button (desktop only) */}
         <div className="hidden md:block">
-          <a href="tel:+27XXXXXXXXX" className="btn btn-primary text-xs md:text-sm">
+          <a href="tel:+27633264684" className="btn btn-primary text-xs md:text-sm">
             Call / WhatsApp
           </a>
         </div>
@@ -112,7 +112,7 @@ export default function Header() {
 
             {/* Call button on mobile */}
             <a
-              href="tel:+27810723204"
+              href="tel:+27633264684"
               className="btn btn-primary text-xs w-fit mt-2"
             >
               Call / WhatsApp

@@ -206,7 +206,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-blue-900">Phone Number</p>
-                  <p className="text-[#6E7A85]">+27 81 071 3204</p>
+                  <p className="text-[#6E7A85]">+27 63 326 4684</p>
                 </div>
               </div>
 
