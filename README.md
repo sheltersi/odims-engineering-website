@@ -6,8 +6,11 @@
 </p>
 
 <p float="left">
-  <img src="public/screenshots/projects.jepg" width="48%" />
+  <img src="public/screenshots/projects.jpeg" width="48%" />
   <img src="public/screenshots/reviews.jpeg" width="48%" />
+</p>
+ <img src="public/screenshots/faq.jpeg" />
+<p>
 </p>
 
 Odims Welding & Automation is a modern business website built to showcase welding, fabrication, and automation services, help customers understand what the company offers, and make it easy to request a quote or contact the team.
