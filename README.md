@@ -36,6 +36,7 @@ Odims Welding & Automation is a modern business website built to showcase weldin
 - **Next.js / React**
 - **Tailwind CSS**
 - **JavaScript**
+- **Framer Motion** for animation
 -  **Email service integration** ( Resend )
 -  **Supabase for storing form submissions
 
