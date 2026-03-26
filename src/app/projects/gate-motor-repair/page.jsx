@@ -9,6 +9,8 @@ import {
   Clock,
   MapPin,
   Phone,
+  RefreshCw,
+  Settings,
   Share2,
   ShieldCheck,
   Wrench,
@@ -20,78 +22,80 @@ import { useEffect, useState } from "react";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 // ─── PROJECT DATA ─────────────────────────────────────────────────────────────
-// In a real app this would be fetched by slug/id from a shared data file or API.
 
 const project = {
-  title: "Custom Sliding Gate Fabrication",
-  subtitle: "Heavy-duty steel sliding gate with powder-coated finish",
-  location: "Johannesburg, Gauteng",
-  category: "Welding",
-  completedDate: "March 2024",
-  duration: "3 days",
+  title: "Gate Motor Repair & Setup",
+  subtitle: "Full diagnosis, repair, and reprogramming of a faulty electric sliding gate motor",
+  location: "Midrand, Gauteng",
+  category: "Gate Motor",
+  completedDate: "November 2023",
+  duration: "Half day",
   images: [
-    "/assets/projects/fabrication/gate-1.png",
-    "/assets/projects/fabrication/work-1.png",
-    "/assets/projects/fabrication/work-2.png",
+    "/assets/projects/gate-motor/work-1.png",
+    "/assets/projects/gate-motor/work-2.png",
+    "/assets/projects/gate-motor/work-3.png",
   ],
-  description: `This project involved the full design, fabrication, and installation of a custom steel
-sliding gate for a residential property in Johannesburg. The client needed a gate that
-was both visually striking and built to handle high daily usage.
+  description: `The client in Midrand had a sliding gate motor that had stopped responding
+to remotes and was intermittently reversing mid-cycle. Rather than replacing the unit
+outright, they wanted a professional diagnosis first to see if it could be salvaged.
 
-We used 50×50mm square tubing for the frame with 25mm flat bar infill, all MIG-welded
-and ground flush for a clean professional finish. The gate was then powder-coated in
-matte black for long-lasting corrosion resistance.
+After a full inspection, we identified two issues: a blown capacitor on the control
+board causing erratic behaviour, and a misaligned limit switch that was sending a false
+"gate closed" signal mid-travel. Both were repaired on site — the capacitor was
+replaced and the limit switch was re-calibrated to the correct open and close positions.
 
-The sliding mechanism runs on a heavy-duty floor track with nylon guide rollers,
-ensuring smooth, quiet operation for years to come.`,
+The motor was then fully reprogrammed from scratch — sensitivity, travel limits, obstacle
+detection force, and auto-close timer were all configured to the manufacturer's
+recommended settings for the gate's weight and width. Both remote controls were
+re-paired and tested across 30 open/close cycles before handover. The unit is now
+running as well as the day it was installed.`,
   highlights: [
-    "50×50mm square steel tubing frame",
-    "MIG-welded & ground flush finish",
-    "Matte black powder-coat coating",
-    "Heavy-duty floor track & nylon rollers",
-    "Compatible with standard gate motors",
-    "Custom width: 4.2 metres",
+    "Full on-site motor diagnosis",
+    "Blown capacitor replaced",
+    "Limit switch re-calibrated",
+    "Motor reprogrammed from scratch",
+    "Obstacle detection force set",
+    "Auto-close timer configured",
+    "2× remotes re-paired & tested",
+    "30-cycle pre-handover test",
   ],
   specs: [
-    { label: "Material",    value: "Mild Steel" },
-    { label: "Width",       value: "4.2 m" },
-    { label: "Height",      value: "1.8 m" },
-    { label: "Finish",      value: "Powder Coat — Matte Black" },
-    { label: "Weld Type",   value: "MIG" },
-    { label: "Motor Ready", value: "Yes" },
-    { label: "Warranty",    value: "2 Years" },
+    { label: "Service Type",   value: "Repair & Reprogramming" },
+    { label: "Fault 1",        value: "Blown Capacitor" },
+    { label: "Fault 2",        value: "Misaligned Limit Switch" },
+    { label: "Remotes",        value: "2× Re-paired" },
+    { label: "Test Cycles",    value: "30 Open/Close" },
+    { label: "Duration",       value: "Half Day" },
+    { label: "Warranty",       value: "6 Months (Repair)" },
   ],
   relatedProjects: [
     {
-      url:"burglar-proofing",
+      title: "Solar Gate Motor Installation",
+      location: "Pretoria",
+      category: "Gate Motor",
+      image: "/assets/projects/solar-gate-motor/work-1.png",
+      slug: "solar-gate-motor-installation",
+    },
+    {
+      title: "Custom Sliding Gate Fabrication",
+      location: "Johannesburg",
+      category: "Welding",
+      image: "/assets/projects/fabrication/gate-1.png",
+      slug: "custom-sliding-gate-fabrication",
+    },
+    {
       title: "Burglar Proofing & Security Bars",
       location: "Soweto",
       category: "Welding",
       image: "/assets/projects/burglar/work-1.png",
       slug: "burglar-proofing-security-bars",
     },
-    {
-      url:"steel-carport-welding",
-      title: "Steel Carport Welding Project",
-      location: "Nelspruit",
-      category: "Welding",
-      image: "/assets/projects/carport/work-1.png",
-      slug: "steel-carport-welding",
-    },
-    {
-      url:"gate-motor-repair",
-      title: "Gate Motor Repair & Setup",
-      location: "Midrand",
-      category: "Gate Motor",
-      image: "/assets/projects/gate-motor/work-1.png",
-      slug: "gate-motor-repair-setup",
-    },
   ],
 };
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-export default function ProjectDetailPage() {
+export default function GateMotorRepairDetailPage() {
   const [activeImg, setActiveImg]       = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const total = project.images.length;
@@ -99,7 +103,6 @@ export default function ProjectDetailPage() {
   const prev = () => setActiveImg((i) => (i - 1 + total) % total);
   const next = () => setActiveImg((i) => (i + 1) % total);
 
-  // keyboard nav for lightbox
   useEffect(() => {
     if (!lightboxOpen) return;
     const handler = (e) => {
@@ -115,11 +118,11 @@ export default function ProjectDetailPage() {
     <div className="min-h-screen bg-white">
 
       {/* ── BREADCRUMB NAV ── */}
-      <div className="border-b border-slate-100 bg-white sticky top-0 z-40 backdrop-blur bg-white/90">
+      <div className="border-b border-slate-100 sticky top-0 z-40 bg-white/90 backdrop-blur">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-blue-600 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-sky-600 transition-colors"
           >
             <ArrowLeft size={15} />
             Back to Projects
@@ -131,7 +134,7 @@ export default function ProjectDetailPage() {
             <span className="text-slate-700 font-medium truncate max-w-[200px]">{project.title}</span>
           </div>
 
-          <button className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-blue-600 transition-colors font-medium">
+          <button className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-sky-600 transition-colors font-medium">
             <Share2 size={14} />
             Share
           </button>
@@ -155,20 +158,16 @@ export default function ProjectDetailPage() {
                 onClick={() => setLightboxOpen(true)}
               />
 
-              {/* overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
 
-              {/* counter */}
               <span className="absolute top-4 right-4 text-xs font-semibold bg-black/40 text-white px-2.5 py-1 rounded-full backdrop-blur-sm">
                 {activeImg + 1} / {total}
               </span>
 
-              {/* expand hint */}
               <span className="absolute bottom-4 right-4 text-xs font-semibold bg-black/40 text-white px-2.5 py-1 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
                 Click to expand
               </span>
 
-              {/* arrows */}
               {total > 1 && (
                 <>
                   <button
@@ -196,7 +195,7 @@ export default function ProjectDetailPage() {
                     onClick={() => setActiveImg(i)}
                     className={`relative flex-1 aspect-video rounded-xl overflow-hidden border-2 transition-all duration-200
                       ${i === activeImg
-                        ? "border-blue-500 shadow-md shadow-blue-100"
+                        ? "border-sky-500 shadow-md shadow-sky-100"
                         : "border-transparent opacity-60 hover:opacity-90"
                       }`}
                   >
@@ -209,8 +208,8 @@ export default function ProjectDetailPage() {
             {/* TITLE + META */}
             <div className="mt-8">
               <div className="flex flex-wrap items-center gap-3 mb-3">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-50 text-sky-700">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
                   {project.category}
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs text-slate-400 font-medium">
@@ -232,6 +231,36 @@ export default function ProjectDetailPage() {
             {/* DIVIDER */}
             <div className="my-7 border-t border-slate-100" />
 
+            {/* DIAGNOSE FIRST CALLOUT */}
+            <div className="flex items-start gap-4 bg-sky-50 border border-sky-100 rounded-2xl p-5 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-sky-500 flex items-center justify-center shrink-0">
+                <Settings size={18} className="text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-black text-sky-900 mb-0.5">Diagnose Before You Replace</p>
+                <p className="text-xs text-sky-700 leading-relaxed">
+                  Most faulty gate motors don't need replacing — they just need the right
+                  repair. We diagnose on site and only recommend a new unit if it's truly
+                  beyond economical repair.
+                </p>
+              </div>
+            </div>
+
+            {/* REPROGRAMMING CALLOUT */}
+            <div className="flex items-start gap-4 bg-teal-50 border border-teal-100 rounded-2xl p-5 mb-7">
+              <div className="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center shrink-0">
+                <RefreshCw size={18} className="text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-black text-teal-900 mb-0.5">Full Reprogramming Included</p>
+                <p className="text-xs text-teal-700 leading-relaxed">
+                  After every repair we reprogram the motor from scratch — travel limits,
+                  obstacle sensitivity, auto-close timer — so it runs exactly as it should,
+                  not just "well enough."
+                </p>
+              </div>
+            </div>
+
             {/* DESCRIPTION */}
             <div>
               <h2 className="text-base font-black uppercase tracking-widest text-slate-300 mb-4">
@@ -247,10 +276,44 @@ export default function ProjectDetailPage() {
             {/* DIVIDER */}
             <div className="my-7 border-t border-slate-100" />
 
+            {/* FAULT BREAKDOWN */}
+            <div className="mb-7">
+              <h2 className="text-base font-black uppercase tracking-widest text-slate-300 mb-5">
+                Faults Found & Fixed
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  {
+                    number: "01",
+                    fault: "Blown Capacitor",
+                    fix: "Replaced on the control board — restored consistent motor torque and removed erratic behaviour.",
+                    color: "bg-sky-50 border-sky-100",
+                    numColor: "text-sky-400",
+                  },
+                  {
+                    number: "02",
+                    fault: "Misaligned Limit Switch",
+                    fix: "Re-calibrated to the correct open and close positions — stopped the gate reversing mid-travel.",
+                    color: "bg-teal-50 border-teal-100",
+                    numColor: "text-teal-400",
+                  },
+                ].map((item) => (
+                  <div key={item.number} className={`p-5 rounded-2xl border ${item.color}`}>
+                    <span className={`text-3xl font-black ${item.numColor} leading-none`}>{item.number}</span>
+                    <p className="mt-2 text-sm font-black text-slate-800">{item.fault}</p>
+                    <p className="mt-1 text-xs text-slate-500 leading-relaxed">{item.fix}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* DIVIDER */}
+            <div className="my-7 border-t border-slate-100" />
+
             {/* HIGHLIGHTS */}
             <div>
               <h2 className="text-base font-black uppercase tracking-widest text-slate-300 mb-5">
-                What's Included
+                What Was Done
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {project.highlights.map((item) => (
@@ -258,7 +321,7 @@ export default function ProjectDetailPage() {
                     key={item}
                     className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100"
                   >
-                    <CheckCircle2 size={17} className="text-blue-500 mt-0.5 shrink-0" />
+                    <CheckCircle2 size={17} className="text-sky-500 mt-0.5 shrink-0" />
                     <span className="text-sm text-slate-700 font-medium">{item}</span>
                   </div>
                 ))}
@@ -271,7 +334,7 @@ export default function ProjectDetailPage() {
             {/* SPECS TABLE */}
             <div>
               <h2 className="text-base font-black uppercase tracking-widest text-slate-300 mb-5">
-                Project Specifications
+                Job Summary
               </h2>
               <div className="rounded-2xl border border-slate-100 overflow-hidden">
                 {project.specs.map((s, i) => (
@@ -296,8 +359,8 @@ export default function ProjectDetailPage() {
 
               {/* QUICK FACTS CARD */}
               <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
-                <div className="bg-blue-600 px-5 py-4">
-                  <p className="text-xs font-bold uppercase tracking-widest text-blue-200 mb-1">Project Summary</p>
+                <div className="bg-sky-500 px-5 py-4">
+                  <p className="text-xs font-bold uppercase tracking-widest text-sky-100 mb-1">Job Summary</p>
                   <p className="text-white font-black text-lg leading-snug">{project.title}</p>
                 </div>
                 <div className="divide-y divide-slate-100">
@@ -305,10 +368,11 @@ export default function ProjectDetailPage() {
                     { icon: <MapPin size={14} />,      label: "Location",  value: project.location },
                     { icon: <Wrench size={14} />,      label: "Category",  value: project.category },
                     { icon: <Clock size={14} />,       label: "Duration",  value: project.duration },
-                    { icon: <ShieldCheck size={14} />, label: "Warranty",  value: "2 Years" },
+                    { icon: <Settings size={14} />,    label: "Service",   value: "Repair + Reprogram" },
+                    { icon: <ShieldCheck size={14} />, label: "Warranty",  value: "6 Months (Repair)" },
                   ].map((row) => (
                     <div key={row.label} className="flex items-center gap-3 px-5 py-3.5">
-                      <span className="text-blue-400 shrink-0">{row.icon}</span>
+                      <span className="text-sky-400 shrink-0">{row.icon}</span>
                       <span className="text-xs text-slate-400 font-medium w-20 shrink-0">{row.label}</span>
                       <span className="text-sm text-slate-800 font-semibold">{row.value}</span>
                     </div>
@@ -318,16 +382,17 @@ export default function ProjectDetailPage() {
 
               {/* CTA CARD */}
               <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 space-y-3">
-                <p className="text-sm font-black text-slate-800">Want something like this?</p>
+                <p className="text-sm font-black text-slate-800">Gate motor playing up?</p>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Get in touch for a free quote. We'll assess your site and recommend the best solution.
+                  Don't replace it before getting a proper diagnosis. We repair and reprogram
+                  most brands — same day in Gauteng.
                 </p>
 
                 <WhatsAppButton className="w-full" />
 
                 <a
                   href="tel:+27000000000"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700 hover:border-blue-300 hover:text-blue-700 transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700 hover:border-sky-300 hover:text-sky-700 transition-all"
                 >
                   <Phone size={14} />
                   Call Us Directly
@@ -337,8 +402,8 @@ export default function ProjectDetailPage() {
               {/* TRUST BADGES */}
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { icon: "🏅", label: "Quality Assured" },
-                  { icon: "⚡", label: "Fast Turnaround" },
+                  { icon: "🔍", label: "Diagnose First" },
+                  { icon: "⚡", label: "Same Day" },
                   { icon: "📍", label: "Local Team" },
                 ].map((b) => (
                   <div
@@ -366,7 +431,7 @@ export default function ProjectDetailPage() {
             </div>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-sky-600 hover:text-sky-800 transition-colors"
             >
               View all <ArrowUpRight size={14} />
             </Link>
@@ -390,7 +455,6 @@ export default function ProjectDetailPage() {
             className="relative max-w-5xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* close */}
             <button
               onClick={() => setLightboxOpen(false)}
               className="absolute -top-4 -right-4 z-10 bg-white rounded-full p-2 shadow-xl hover:bg-slate-50 transition"
@@ -404,7 +468,6 @@ export default function ProjectDetailPage() {
               className="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
             />
 
-            {/* lightbox arrows */}
             {total > 1 && (
               <>
                 <button
@@ -422,7 +485,6 @@ export default function ProjectDetailPage() {
               </>
             )}
 
-            {/* lightbox dots */}
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
               {project.images.map((_, i) => (
                 <button
@@ -454,7 +516,7 @@ function RelatedCard({ project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group block bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-100/50 hover:-translate-y-1 transition-all duration-300"
+      className="group block bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-sky-100/50 hover:-translate-y-1 transition-all duration-300"
     >
       <div className="relative h-44 overflow-hidden bg-slate-100">
         <img
@@ -473,14 +535,11 @@ function RelatedCard({ project }) {
           <MapPin size={10} />
           {project.location}
         </div>
-        <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-700 transition-colors leading-snug">
+        <h3 className="text-sm font-bold text-slate-900 group-hover:text-sky-700 transition-colors leading-snug">
           {project.title}
         </h3>
-        <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-500 group-hover:text-blue-700 transition-colors">
-           <Link href={`/projects/${project.url}`} className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">
-            View details <ArrowUpRight size={13} />
-          </Link>
-
+        <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-sky-500 group-hover:text-sky-700 transition-colors">
+          View project <ArrowUpRight size={12} />
         </span>
       </div>
     </Link>

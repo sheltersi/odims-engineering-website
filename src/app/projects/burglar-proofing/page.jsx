@@ -7,6 +7,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock,
+  Home,
+  Lock,
   MapPin,
   Phone,
   Share2,
@@ -20,58 +22,61 @@ import { useEffect, useState } from "react";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 // ─── PROJECT DATA ─────────────────────────────────────────────────────────────
-// In a real app this would be fetched by slug/id from a shared data file or API.
 
 const project = {
-  title: "Custom Sliding Gate Fabrication",
-  subtitle: "Heavy-duty steel sliding gate with powder-coated finish",
-  location: "Johannesburg, Gauteng",
+  title: "Burglar Proofing & Security Bars",
+  subtitle: "Custom steel burglar bars and security gates for full home protection",
+  location: "Soweto, Gauteng",
   category: "Welding",
-  completedDate: "March 2024",
-  duration: "3 days",
+  completedDate: "December 2023",
+  duration: "2 days",
   images: [
-    "/assets/projects/fabrication/gate-1.png",
-    "/assets/projects/fabrication/work-1.png",
-    "/assets/projects/fabrication/work-2.png",
+    "/assets/projects/burglar/work-1.png",
+    "/assets/projects/burglar/work-2.png",
   ],
-  description: `This project involved the full design, fabrication, and installation of a custom steel
-sliding gate for a residential property in Johannesburg. The client needed a gate that
-was both visually striking and built to handle high daily usage.
+  description: `This project involved the custom fabrication and installation of burglar bars
+and a security gate for a residential home in Soweto. The homeowner wanted a solution
+that was visually clean and modern — not the outdated look of old-style diamond-pattern
+bars — while still providing maximum deterrent and physical resistance.
 
-We used 50×50mm square tubing for the frame with 25mm flat bar infill, all MIG-welded
-and ground flush for a clean professional finish. The gate was then powder-coated in
-matte black for long-lasting corrosion resistance.
+We designed flat bar vertical burglar bars for all windows, welded to a solid 25×25mm
+square tube frame bolted directly into the brickwork with chemical anchors. The front
+security gate was a full-height slam-lock design with a deadbolt, fabricated from
+40×40mm square tubing and 16mm solid round bar infill.
 
-The sliding mechanism runs on a heavy-duty floor track with nylon guide rollers,
-ensuring smooth, quiet operation for years to come.`,
+All steelwork was treated with a rust-inhibiting primer and finished in a satin black
+powder coat. The result is a home that looks sharp, feels secure, and gives the owner
+real peace of mind.`,
   highlights: [
-    "50×50mm square steel tubing frame",
-    "MIG-welded & ground flush finish",
-    "Matte black powder-coat coating",
-    "Heavy-duty floor track & nylon rollers",
-    "Compatible with standard gate motors",
-    "Custom width: 4.2 metres",
+    "Custom flat bar vertical design",
+    "25×25mm square tube frame",
+    "Chemical anchor wall fixing",
+    "Full-height slam-lock security gate",
+    "Deadbolt locking mechanism",
+    "Rust-inhibiting primer treatment",
+    "Satin black powder coat finish",
+    "Modern, clean aesthetic",
   ],
   specs: [
-    { label: "Material",    value: "Mild Steel" },
-    { label: "Width",       value: "4.2 m" },
-    { label: "Height",      value: "1.8 m" },
-    { label: "Finish",      value: "Powder Coat — Matte Black" },
-    { label: "Weld Type",   value: "MIG" },
-    { label: "Motor Ready", value: "Yes" },
-    { label: "Warranty",    value: "2 Years" },
+    { label: "Bar Style",      value: "Flat Bar Vertical" },
+    { label: "Frame",          value: "25×25mm Square Tube" },
+    { label: "Wall Fixing",    value: "Chemical Anchors" },
+    { label: "Gate Type",      value: "Full-Height Slam-Lock" },
+    { label: "Gate Material",  value: "40×40mm Square Tube" },
+    { label: "Gate Infill",    value: "16mm Solid Round Bar" },
+    { label: "Finish",         value: "Satin Black Powder Coat" },
+    { label: "Installation",   value: "2 Days" },
+    { label: "Warranty",       value: "2 Years" },
   ],
   relatedProjects: [
     {
-      url:"burglar-proofing",
-      title: "Burglar Proofing & Security Bars",
-      location: "Soweto",
+      title: "Custom Sliding Gate Fabrication",
+      location: "Johannesburg",
       category: "Welding",
-      image: "/assets/projects/burglar/work-1.png",
-      slug: "burglar-proofing-security-bars",
+      image: "/assets/projects/fabrication/gate-1.png",
+      slug: "custom-sliding-gate-fabrication",
     },
     {
-      url:"steel-carport-welding",
       title: "Steel Carport Welding Project",
       location: "Nelspruit",
       category: "Welding",
@@ -79,19 +84,18 @@ ensuring smooth, quiet operation for years to come.`,
       slug: "steel-carport-welding",
     },
     {
-      url:"gate-motor-repair",
-      title: "Gate Motor Repair & Setup",
-      location: "Midrand",
-      category: "Gate Motor",
-      image: "/assets/projects/gate-motor/work-1.png",
-      slug: "gate-motor-repair-setup",
+      title: "Electric Fence Installation",
+      location: "Rustenburg",
+      category: "Fencing",
+      image: "/assets/projects/fencing/work-1.png",
+      slug: "electric-fence-installation",
     },
   ],
 };
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-export default function ProjectDetailPage() {
+export default function BurglarProofingDetailPage() {
   const [activeImg, setActiveImg]       = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const total = project.images.length;
@@ -99,7 +103,6 @@ export default function ProjectDetailPage() {
   const prev = () => setActiveImg((i) => (i - 1 + total) % total);
   const next = () => setActiveImg((i) => (i + 1) % total);
 
-  // keyboard nav for lightbox
   useEffect(() => {
     if (!lightboxOpen) return;
     const handler = (e) => {
@@ -115,7 +118,7 @@ export default function ProjectDetailPage() {
     <div className="min-h-screen bg-white">
 
       {/* ── BREADCRUMB NAV ── */}
-      <div className="border-b border-slate-100 bg-white sticky top-0 z-40 backdrop-blur bg-white/90">
+      <div className="border-b border-slate-100 sticky top-0 z-40 bg-white/90 backdrop-blur">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <Link
             href="/projects"
@@ -155,20 +158,16 @@ export default function ProjectDetailPage() {
                 onClick={() => setLightboxOpen(true)}
               />
 
-              {/* overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
 
-              {/* counter */}
               <span className="absolute top-4 right-4 text-xs font-semibold bg-black/40 text-white px-2.5 py-1 rounded-full backdrop-blur-sm">
                 {activeImg + 1} / {total}
               </span>
 
-              {/* expand hint */}
               <span className="absolute bottom-4 right-4 text-xs font-semibold bg-black/40 text-white px-2.5 py-1 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
                 Click to expand
               </span>
 
-              {/* arrows */}
               {total > 1 && (
                 <>
                   <button
@@ -231,6 +230,34 @@ export default function ProjectDetailPage() {
 
             {/* DIVIDER */}
             <div className="my-7 border-t border-slate-100" />
+
+            {/* MODERN DESIGN CALLOUT */}
+            <div className="flex items-start gap-4 bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shrink-0">
+                <Home size={18} className="text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-black text-blue-900 mb-0.5">Modern, Clean Aesthetic</p>
+                <p className="text-xs text-blue-700 leading-relaxed">
+                  No outdated diamond-pattern bars here. We design burglar proofing that
+                  looks sharp on your home while still providing maximum physical resistance.
+                </p>
+              </div>
+            </div>
+
+            {/* SLAM-LOCK CALLOUT */}
+            <div className="flex items-start gap-4 bg-indigo-50 border border-indigo-100 rounded-2xl p-5 mb-7">
+              <div className="w-10 h-10 rounded-xl bg-indigo-500 flex items-center justify-center shrink-0">
+                <Lock size={18} className="text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-black text-indigo-900 mb-0.5">Slam-Lock Security Gate</p>
+                <p className="text-xs text-indigo-700 leading-relaxed">
+                  The front security gate locks automatically on closing — no key needed to
+                  secure it. A deadbolt provides an additional layer of protection.
+                </p>
+              </div>
+            </div>
 
             {/* DESCRIPTION */}
             <div>
@@ -305,6 +332,7 @@ export default function ProjectDetailPage() {
                     { icon: <MapPin size={14} />,      label: "Location",  value: project.location },
                     { icon: <Wrench size={14} />,      label: "Category",  value: project.category },
                     { icon: <Clock size={14} />,       label: "Duration",  value: project.duration },
+                    { icon: <Lock size={14} />,        label: "Gate Type", value: "Slam-Lock" },
                     { icon: <ShieldCheck size={14} />, label: "Warranty",  value: "2 Years" },
                   ].map((row) => (
                     <div key={row.label} className="flex items-center gap-3 px-5 py-3.5">
@@ -318,9 +346,10 @@ export default function ProjectDetailPage() {
 
               {/* CTA CARD */}
               <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 space-y-3">
-                <p className="text-sm font-black text-slate-800">Want something like this?</p>
+                <p className="text-sm font-black text-slate-800">Ready to secure your home?</p>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Get in touch for a free quote. We'll assess your site and recommend the best solution.
+                  We fabricate and install custom burglar proofing across Gauteng.
+                  Every job is measured, built, and fitted on site — no off-the-shelf bars.
                 </p>
 
                 <WhatsAppButton className="w-full" />
@@ -337,8 +366,8 @@ export default function ProjectDetailPage() {
               {/* TRUST BADGES */}
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { icon: "🏅", label: "Quality Assured" },
-                  { icon: "⚡", label: "Fast Turnaround" },
+                  { icon: "🔒", label: "Custom Built" },
+                  { icon: "🎨", label: "Powder Coated" },
                   { icon: "📍", label: "Local Team" },
                 ].map((b) => (
                   <div
@@ -390,7 +419,6 @@ export default function ProjectDetailPage() {
             className="relative max-w-5xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* close */}
             <button
               onClick={() => setLightboxOpen(false)}
               className="absolute -top-4 -right-4 z-10 bg-white rounded-full p-2 shadow-xl hover:bg-slate-50 transition"
@@ -404,7 +432,6 @@ export default function ProjectDetailPage() {
               className="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
             />
 
-            {/* lightbox arrows */}
             {total > 1 && (
               <>
                 <button
@@ -422,7 +449,6 @@ export default function ProjectDetailPage() {
               </>
             )}
 
-            {/* lightbox dots */}
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
               {project.images.map((_, i) => (
                 <button
@@ -477,10 +503,7 @@ function RelatedCard({ project }) {
           {project.title}
         </h3>
         <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-500 group-hover:text-blue-700 transition-colors">
-           <Link href={`/projects/${project.url}`} className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">
-            View details <ArrowUpRight size={13} />
-          </Link>
-
+          View project <ArrowUpRight size={12} />
         </span>
       </div>
     </Link>

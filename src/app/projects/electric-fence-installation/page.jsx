@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  AlertTriangle,
   ArrowLeft,
   ArrowUpRight,
   CheckCircle2,
@@ -11,6 +12,7 @@ import {
   Phone,
   Share2,
   ShieldCheck,
+  Wifi,
   Wrench,
   X,
 } from "lucide-react";
@@ -20,50 +22,57 @@ import { useEffect, useState } from "react";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 // ─── PROJECT DATA ─────────────────────────────────────────────────────────────
-// In a real app this would be fetched by slug/id from a shared data file or API.
 
 const project = {
-  title: "Custom Sliding Gate Fabrication",
-  subtitle: "Heavy-duty steel sliding gate with powder-coated finish",
-  location: "Johannesburg, Gauteng",
-  category: "Welding",
-  completedDate: "March 2024",
-  duration: "3 days",
+  title: "Electric Fence Installation",
+  subtitle: "Full perimeter electric fencing for improved residential security",
+  location: "Rustenburg, North West",
+  category: "Fencing",
+  completedDate: "February 2024",
+  duration: "2 days",
   images: [
-    "/assets/projects/fabrication/gate-1.png",
-    "/assets/projects/fabrication/work-1.png",
-    "/assets/projects/fabrication/work-2.png",
+    "/assets/projects/fencing/work-1.png",
+    "/assets/projects/fencing/work-2.png",
+    "/assets/projects/fencing/work-3.png",
+    "/assets/projects/fencing/work-4.png",
   ],
-  description: `This project involved the full design, fabrication, and installation of a custom steel
-sliding gate for a residential property in Johannesburg. The client needed a gate that
-was both visually striking and built to handle high daily usage.
+  description: `This project covered the full design and installation of an electric fence system
+around the complete perimeter of a residential property in Rustenburg. The client had
+experienced multiple attempted break-ins and needed a reliable, visible deterrent that
+would also alert them to any tampering.
 
-We used 50×50mm square tubing for the frame with 25mm flat bar infill, all MIG-welded
-and ground flush for a clean professional finish. The gate was then powder-coated in
-matte black for long-lasting corrosion resistance.
+We installed 8-strand galvanised steel wire on fibreglass offset brackets, mounted on
+top of an existing precast concrete wall. The energiser is a 12V solar-compatible
+unit with a built-in alarm and zone monitoring — meaning any breach or wire cut triggers
+an immediate siren and SMS alert to the homeowner's phone.
 
-The sliding mechanism runs on a heavy-duty floor track with nylon guide rollers,
-ensuring smooth, quiet operation for years to come.`,
+All work was done in compliance with SANS 10222-3 electric fence safety standards.
+Warning signage was installed at every entry point and at 10-metre intervals along
+the fence line, as required by regulation. The system was tested and certified before
+handover.`,
   highlights: [
-    "50×50mm square steel tubing frame",
-    "MIG-welded & ground flush finish",
-    "Matte black powder-coat coating",
-    "Heavy-duty floor track & nylon rollers",
-    "Compatible with standard gate motors",
-    "Custom width: 4.2 metres",
+    "8-strand galvanised steel wire",
+    "Fibreglass offset brackets",
+    "Solar-compatible energiser unit",
+    "Built-in alarm & siren",
+    "SMS alert on tamper or breach",
+    "SANS 10222-3 compliant installation",
+    "Regulatory warning signage included",
+    "Full perimeter coverage",
   ],
   specs: [
-    { label: "Material",    value: "Mild Steel" },
-    { label: "Width",       value: "4.2 m" },
-    { label: "Height",      value: "1.8 m" },
-    { label: "Finish",      value: "Powder Coat — Matte Black" },
-    { label: "Weld Type",   value: "MIG" },
-    { label: "Motor Ready", value: "Yes" },
-    { label: "Warranty",    value: "2 Years" },
+    { label: "Wire",          value: "8-Strand Galvanised Steel" },
+    { label: "Brackets",      value: "Fibreglass Offset" },
+    { label: "Energiser",     value: "Solar-Compatible 12V" },
+    { label: "Alarm",         value: "Built-in Siren + SMS Alert" },
+    { label: "Coverage",      value: "Full Perimeter" },
+    { label: "Standard",      value: "SANS 10222-3" },
+    { label: "Signage",       value: "Every 10m + Entry Points" },
+    { label: "Installation",  value: "2 Days" },
+    { label: "Warranty",      value: "2 Years" },
   ],
   relatedProjects: [
     {
-      url:"burglar-proofing",
       title: "Burglar Proofing & Security Bars",
       location: "Soweto",
       category: "Welding",
@@ -71,27 +80,25 @@ ensuring smooth, quiet operation for years to come.`,
       slug: "burglar-proofing-security-bars",
     },
     {
-      url:"steel-carport-welding",
-      title: "Steel Carport Welding Project",
-      location: "Nelspruit",
+      title: "Custom Sliding Gate Fabrication",
+      location: "Johannesburg",
       category: "Welding",
-      image: "/assets/projects/carport/work-1.png",
-      slug: "steel-carport-welding",
+      image: "/assets/projects/fabrication/gate-1.png",
+      slug: "custom-sliding-gate-fabrication",
     },
     {
-      url:"gate-motor-repair",
-      title: "Gate Motor Repair & Setup",
-      location: "Midrand",
+      title: "Solar Gate Motor Installation",
+      location: "Pretoria",
       category: "Gate Motor",
-      image: "/assets/projects/gate-motor/work-1.png",
-      slug: "gate-motor-repair-setup",
+      image: "/assets/projects/solar-gate-motor/work-1.png",
+      slug: "solar-gate-motor-installation",
     },
   ],
 };
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-export default function ProjectDetailPage() {
+export default function ElectricFenceDetailPage() {
   const [activeImg, setActiveImg]       = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const total = project.images.length;
@@ -99,7 +106,6 @@ export default function ProjectDetailPage() {
   const prev = () => setActiveImg((i) => (i - 1 + total) % total);
   const next = () => setActiveImg((i) => (i + 1) % total);
 
-  // keyboard nav for lightbox
   useEffect(() => {
     if (!lightboxOpen) return;
     const handler = (e) => {
@@ -115,7 +121,7 @@ export default function ProjectDetailPage() {
     <div className="min-h-screen bg-white">
 
       {/* ── BREADCRUMB NAV ── */}
-      <div className="border-b border-slate-100 bg-white sticky top-0 z-40 backdrop-blur bg-white/90">
+      <div className="border-b border-slate-100 sticky top-0 z-40 bg-white/90 backdrop-blur">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <Link
             href="/projects"
@@ -155,20 +161,16 @@ export default function ProjectDetailPage() {
                 onClick={() => setLightboxOpen(true)}
               />
 
-              {/* overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
 
-              {/* counter */}
               <span className="absolute top-4 right-4 text-xs font-semibold bg-black/40 text-white px-2.5 py-1 rounded-full backdrop-blur-sm">
                 {activeImg + 1} / {total}
               </span>
 
-              {/* expand hint */}
               <span className="absolute bottom-4 right-4 text-xs font-semibold bg-black/40 text-white px-2.5 py-1 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
                 Click to expand
               </span>
 
-              {/* arrows */}
               {total > 1 && (
                 <>
                   <button
@@ -196,7 +198,7 @@ export default function ProjectDetailPage() {
                     onClick={() => setActiveImg(i)}
                     className={`relative flex-1 aspect-video rounded-xl overflow-hidden border-2 transition-all duration-200
                       ${i === activeImg
-                        ? "border-blue-500 shadow-md shadow-blue-100"
+                        ? "border-slate-500 shadow-md shadow-slate-200"
                         : "border-transparent opacity-60 hover:opacity-90"
                       }`}
                   >
@@ -209,8 +211,8 @@ export default function ProjectDetailPage() {
             {/* TITLE + META */}
             <div className="mt-8">
               <div className="flex flex-wrap items-center gap-3 mb-3">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                   {project.category}
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs text-slate-400 font-medium">
@@ -231,6 +233,34 @@ export default function ProjectDetailPage() {
 
             {/* DIVIDER */}
             <div className="my-7 border-t border-slate-100" />
+
+            {/* COMPLIANCE CALLOUT BANNER */}
+            <div className="flex items-start gap-4 bg-amber-50 border border-amber-100 rounded-2xl p-5 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-amber-400 flex items-center justify-center shrink-0">
+                <ShieldCheck size={18} className="text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-black text-amber-800 mb-0.5">SANS 10222-3 Certified</p>
+                <p className="text-xs text-amber-700 leading-relaxed">
+                  Every installation meets South African electric fence safety standards —
+                  fully tested, certified, and ready for insurance purposes.
+                </p>
+              </div>
+            </div>
+
+            {/* SMS ALERT CALLOUT BANNER */}
+            <div className="flex items-start gap-4 bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-7">
+              <div className="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center shrink-0">
+                <Wifi size={18} className="text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-black text-blue-800 mb-0.5">Instant SMS Alerts</p>
+                <p className="text-xs text-blue-700 leading-relaxed">
+                  The energiser sends an SMS directly to your phone the moment the fence
+                  is tampered with, cut, or breached — even while you're asleep.
+                </p>
+              </div>
+            </div>
 
             {/* DESCRIPTION */}
             <div>
@@ -258,7 +288,7 @@ export default function ProjectDetailPage() {
                     key={item}
                     className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100"
                   >
-                    <CheckCircle2 size={17} className="text-blue-500 mt-0.5 shrink-0" />
+                    <CheckCircle2 size={17} className="text-slate-500 mt-0.5 shrink-0" />
                     <span className="text-sm text-slate-700 font-medium">{item}</span>
                   </div>
                 ))}
@@ -288,6 +318,23 @@ export default function ProjectDetailPage() {
                 ))}
               </div>
             </div>
+
+            {/* DIVIDER */}
+            <div className="my-7 border-t border-slate-100" />
+
+            {/* SAFETY NOTE */}
+            <div className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-2xl p-5">
+              <AlertTriangle size={17} className="text-red-400 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-bold text-red-700 mb-0.5">Safety Notice</p>
+                <p className="text-xs text-red-600 leading-relaxed">
+                  Electric fences must be installed by a registered installer and comply with
+                  SANS 10222-3. All our work is compliant and we provide a certificate of
+                  compliance (CoC) on completion.
+                </p>
+              </div>
+            </div>
+
           </div>
 
           {/* ── RIGHT: STICKY SIDEBAR ── */}
@@ -296,19 +343,20 @@ export default function ProjectDetailPage() {
 
               {/* QUICK FACTS CARD */}
               <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
-                <div className="bg-blue-600 px-5 py-4">
-                  <p className="text-xs font-bold uppercase tracking-widest text-blue-200 mb-1">Project Summary</p>
+                <div className="bg-slate-700 px-5 py-4">
+                  <p className="text-xs font-bold uppercase tracking-widest text-slate-300 mb-1">Project Summary</p>
                   <p className="text-white font-black text-lg leading-snug">{project.title}</p>
                 </div>
                 <div className="divide-y divide-slate-100">
                   {[
-                    { icon: <MapPin size={14} />,      label: "Location",  value: project.location },
-                    { icon: <Wrench size={14} />,      label: "Category",  value: project.category },
-                    { icon: <Clock size={14} />,       label: "Duration",  value: project.duration },
-                    { icon: <ShieldCheck size={14} />, label: "Warranty",  value: "2 Years" },
+                    { icon: <MapPin size={14} />,       label: "Location",  value: project.location },
+                    { icon: <Wrench size={14} />,       label: "Category",  value: project.category },
+                    { icon: <Clock size={14} />,        label: "Duration",  value: project.duration },
+                    { icon: <AlertTriangle size={14} />,label: "Standard",  value: "SANS 10222-3" },
+                    { icon: <ShieldCheck size={14} />,  label: "Warranty",  value: "2 Years" },
                   ].map((row) => (
                     <div key={row.label} className="flex items-center gap-3 px-5 py-3.5">
-                      <span className="text-blue-400 shrink-0">{row.icon}</span>
+                      <span className="text-slate-400 shrink-0">{row.icon}</span>
                       <span className="text-xs text-slate-400 font-medium w-20 shrink-0">{row.label}</span>
                       <span className="text-sm text-slate-800 font-semibold">{row.value}</span>
                     </div>
@@ -318,16 +366,17 @@ export default function ProjectDetailPage() {
 
               {/* CTA CARD */}
               <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 space-y-3">
-                <p className="text-sm font-black text-slate-800">Want something like this?</p>
+                <p className="text-sm font-black text-slate-800">Want to secure your perimeter?</p>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Get in touch for a free quote. We'll assess your site and recommend the best solution.
+                  We install compliant electric fencing across Gauteng and North West.
+                  Contact us for a free site visit and quote.
                 </p>
 
                 <WhatsAppButton className="w-full" />
 
                 <a
                   href="tel:+27000000000"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700 hover:border-blue-300 hover:text-blue-700 transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700 hover:border-slate-400 hover:text-slate-900 transition-all"
                 >
                   <Phone size={14} />
                   Call Us Directly
@@ -337,8 +386,8 @@ export default function ProjectDetailPage() {
               {/* TRUST BADGES */}
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { icon: "🏅", label: "Quality Assured" },
-                  { icon: "⚡", label: "Fast Turnaround" },
+                  { icon: "🛡️", label: "SANS Certified" },
+                  { icon: "📄", label: "CoC Provided" },
                   { icon: "📍", label: "Local Team" },
                 ].map((b) => (
                   <div
@@ -366,7 +415,7 @@ export default function ProjectDetailPage() {
             </div>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors"
             >
               View all <ArrowUpRight size={14} />
             </Link>
@@ -390,7 +439,6 @@ export default function ProjectDetailPage() {
             className="relative max-w-5xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* close */}
             <button
               onClick={() => setLightboxOpen(false)}
               className="absolute -top-4 -right-4 z-10 bg-white rounded-full p-2 shadow-xl hover:bg-slate-50 transition"
@@ -404,7 +452,6 @@ export default function ProjectDetailPage() {
               className="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
             />
 
-            {/* lightbox arrows */}
             {total > 1 && (
               <>
                 <button
@@ -422,7 +469,6 @@ export default function ProjectDetailPage() {
               </>
             )}
 
-            {/* lightbox dots */}
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
               {project.images.map((_, i) => (
                 <button
@@ -454,7 +500,7 @@ function RelatedCard({ project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group block bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-100/50 hover:-translate-y-1 transition-all duration-300"
+      className="group block bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300"
     >
       <div className="relative h-44 overflow-hidden bg-slate-100">
         <img
@@ -473,14 +519,11 @@ function RelatedCard({ project }) {
           <MapPin size={10} />
           {project.location}
         </div>
-        <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-700 transition-colors leading-snug">
+        <h3 className="text-sm font-bold text-slate-900 group-hover:text-slate-600 transition-colors leading-snug">
           {project.title}
         </h3>
-        <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-500 group-hover:text-blue-700 transition-colors">
-           <Link href={`/projects/${project.url}`} className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">
-            View details <ArrowUpRight size={13} />
-          </Link>
-
+        <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-slate-500 group-hover:text-slate-700 transition-colors">
+          View project <ArrowUpRight size={12} />
         </span>
       </div>
     </Link>

@@ -21,7 +21,7 @@ const projects = [
       "A fully welded steel sliding gate with a clean modern design and powder-coated finish.",
   },
   {
-    url: "/projects/solar-gate-motor",
+    url: "solar-gate-motor",
     title: "Solar Gate Motor Installation",
     images: [
       "/assets/projects/solar-gate-motor/work-1.png",
@@ -33,7 +33,7 @@ const projects = [
       "Installed a high-efficiency solar gate motor system for reliable off-grid gate automation.",
   },
   {
-    url: "/projects/electric-fence-installation",
+    url: "electric-fence-installation",
     title: "Electric Fence Installation",
     images: [
       "/assets/projects/fencing/work-1.png",
@@ -47,6 +47,7 @@ const projects = [
       "Full perimeter electric fencing installation for improved residential security.",
   },
   {
+    url: "burglar-proofing",
     title: "Burglar Proofing & Security Bars",
     images: [
       "/assets/projects/burglar/work-1.png",
@@ -58,6 +59,7 @@ const projects = [
       "Custom burglar bars and security gates delivered with strong, durable steel work.",
   },
   {
+    url: "gate-motor-repair",
     title: "Gate Motor Repair & Setup",
     images: [
       "/assets/projects/gate-motor/work-1.png",
