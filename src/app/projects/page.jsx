@@ -1,46 +1,71 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const projects = [
   {
+    url:"gate-fabrication",
     title: "Custom Sliding Gate Fabrication",
-    images: ["/assets/projects/fabrication/gate-1.png","/assets/projects/fabrication/work-1.png","/assets/projects/fabrication/work-2.png"],
+    images: [
+      "/assets/projects/fabrication/gate-1.png",
+      "/assets/projects/fabrication/work-1.png",
+      "/assets/projects/fabrication/work-2.png",
+    ],
     location: "Johannesburg",
     category: "Welding",
     description:
       "A fully welded steel sliding gate with a clean modern design and powder-coated finish.",
   },
   {
+    url: "solar-gate-motor",
     title: "Solar Gate Motor Installation",
-    images: ["/assets/projects/solar-gate-motor/work-1.png","/assets/projects/solar-gate-motor/work-2.png"],
+    images: [
+      "/assets/projects/solar-gate-motor/work-1.png",
+      "/assets/projects/solar-gate-motor/work-2.png",
+    ],
     location: "Pretoria",
     category: "Gate Motor",
     description:
       "Installed a high-efficiency solar gate motor system for reliable off-grid gate automation.",
   },
   {
+    url: "electric-fence-installation",
     title: "Electric Fence Installation",
-    images: ["/assets/projects/fencing/work-1.png","/assets/projects/fencing/work-2.png","/assets/projects/fencing/work-3.png","/assets/projects/fencing/work-4.png"],
+    images: [
+      "/assets/projects/fencing/work-1.png",
+      "/assets/projects/fencing/work-2.png",
+      "/assets/projects/fencing/work-3.png",
+      "/assets/projects/fencing/work-4.png",
+    ],
     location: "Rustenburg",
     category: "Fencing",
     description:
       "Full perimeter electric fencing installation for improved residential security.",
   },
   {
+    url: "burglar-proofing",
     title: "Burglar Proofing & Security Bars",
-    images: ["/assets/projects/burglar/work-1.png","/assets/projects/burglar/work-2.png"],
+    images: [
+      "/assets/projects/burglar/work-1.png",
+      "/assets/projects/burglar/work-2.png",
+    ],
     location: "Soweto",
     category: "Welding",
     description:
       "Custom burglar bars and security gates delivered with strong, durable steel work.",
   },
   {
+    url: "gate-motor-repair",
     title: "Gate Motor Repair & Setup",
-    images: ["/assets/projects/gate-motor/work-1.png","/assets/projects/gate-motor/work-2.png","/assets/projects/gate-motor/work-3.png"],
+    images: [
+      "/assets/projects/gate-motor/work-1.png",
+      "/assets/projects/gate-motor/work-2.png",
+      "/assets/projects/gate-motor/work-3.png",
+    ],
     location: "Midrand",
     category: "Gate Motor",
     description:
@@ -48,228 +73,303 @@ const projects = [
   },
   {
     title: "Steel Carport Welding Project",
-    images: ["/assets/projects/carport/work-1.png","/assets/projects/carport/work-2.png","/assets/projects/carport/work-3.png","/assets/projects/carport/work-4.png"],
+    images: [
+      "/assets/projects/carport/work-1.png",
+      "/assets/projects/carport/work-2.png",
+      "/assets/projects/carport/work-3.png",
+      "/assets/projects/carport/work-4.png",
+    ],
     location: "Nelspruit",
     category: "Welding",
     description:
       "A durable steel carport structure welded and installed for long-lasting protection.",
   },
-  
 ];
 
-// categories
 const filters = ["All", "Welding", "Gate Motor", "Fencing", "Security"];
 
-// ---------------------------------
-// COMPONENT
-// ---------------------------------
+const CATEGORY_STYLES = {
+  Welding:     { bg: "bg-blue-50",   text: "text-blue-700",   dot: "bg-blue-500" },
+  "Gate Motor":{ bg: "bg-sky-50",    text: "text-sky-700",    dot: "bg-sky-500"  },
+  Fencing:     { bg: "bg-slate-100", text: "text-slate-600",  dot: "bg-slate-400"},
+  Security:    { bg: "bg-indigo-50", text: "text-indigo-700", dot: "bg-indigo-500"},
+};
+
+const stats = [
+  { value: "340+", label: "Projects Done" },
+  { value: "12yr", label: "In the Trade" },
+  { value: "6",    label: "Provinces" },
+  { value: "98%",  label: "Satisfaction" },
+];
+
+// ─── PAGE ────────────────────────────────────────────────────────────────────
 
 export default function ProjectsPage() {
-  const [active, setActive] = useState("All");
+  const [active, setActive]           = useState("All");
   const [visibleCount, setVisibleCount] = useState(6);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // filter projects
-  const filtered = active === "All" ? projects : projects.filter(p => p.category === active);
-
-  const loadMore = () => setVisibleCount(prev => prev + 6);
+  const filtered =
+    active === "All" ? projects : projects.filter((p) => p.category === active);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-16 relative overflow-hidden">
+    <div className="min-h-screen bg-white">
 
-      {/* SHAPES */}
-      {/* <div className="absolute top-0 left-20 w-72 h-72 bg-blue-300/20 rounded-full"></div>
-      <div className="absolute top-0 left-55 w-72 h-72 bg-blue-300/20 rounded-full"></div>
-      <div className="absolute top-0 left-95 w-72 h-72 bg-blue-300/20 rounded-full"></div>
-      <div className="absolute bottom-0 right-10 w-96 h-96 bg-blue-400/10 rounded-full"></div> */}
-<div className="absolute w-40 h-40 md:left-120 left-20 bg-blue-300/20 rotate-45"></div>
-<div className="absolute w-40 h-40 md:left-160 left-55 bg-blue-300/20 rotate-45"></div>
-<div className="absolute w-40 h-40 md:left-200 left-95 bg-blue-300/20 rotate-45"></div>
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden bg-white border-b border-slate-100">
 
-      <div className="max-w-7xl mx-auto relative z-10 ">
+        {/* geometric accent blobs */}
+        <div className="pointer-events-none absolute -top-20 -right-20 w-[420px] h-[420px] rounded-full bg-blue-50 opacity-70" />
+        <div className="pointer-events-none absolute top-24 right-40 w-32 h-32 rounded-full bg-sky-100 opacity-60" />
+        <div className="pointer-events-none absolute -bottom-10 left-1/3 w-56 h-56 rounded-full bg-slate-50" />
 
-        {/* HEADER */}
-        <div className="text-center mb-12 pb-12">
-  <h1 className="text-4xl md:text-5xl font-bold font-mono text-blue-900">
-    Our <span className="text-[#59A5D8]">Projects</span>
-  </h1>
+        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
 
-  <div className="max-w-2xl mx-auto">
-    <p className="text-center text-[#6E7A85] mt-4 font-mono text-lg">
-      A showcase of our recent installations, repairs, and custom welding work.
-    </p>
-  </div>
-</div>
+          {/* left copy */}
+          <div>
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-blue-600 uppercase mb-5">
+              <span className="w-6 h-px bg-blue-500 inline-block" />
+              Our Portfolio
+            </span>
 
+            <h1 className="text-5xl md:text-6xl font-black tracking-tight text-slate-900 leading-[1.05]">
+              Real Work.<br />
+              <span className="text-blue-600">Real Results.</span>
+            </h1>
 
-        {/* FILTER BUTTONS */}
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
+            <p className="mt-5 max-w-md text-slate-500 text-base leading-relaxed">
+              A showcase of our installations, repairs, and custom welding — built
+              to last across Gauteng and beyond.
+            </p>
+          </div>
+
+          {/* stats strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden shrink-0">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-white px-6 py-5 flex flex-col items-center text-center">
+                <span className="text-2xl font-black text-blue-600 tracking-tight">{s.value}</span>
+                <span className="mt-0.5 text-[11px] font-semibold uppercase tracking-widest text-slate-400">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FILTERS ── */}
+      <section className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-2 overflow-x-auto scrollbar-none">
+          <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mr-2 whitespace-nowrap">
+            Filter
+          </span>
           {filters.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActive(cat)}
-              className={`px-5 py-2 rounded-full border text-sm font-semibold transition 
-              ${
-                active === cat
-                  ? "bg-blue-600 text-white shadow-md"
-                  : "bg-white text-blue-700 border-blue-300 hover:bg-blue-100"
-              }`}
+              onClick={() => { setActive(cat); setVisibleCount(6); }}
+              className={`whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-200
+                ${active === cat
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                  : "bg-slate-100 text-slate-500 hover:bg-blue-50 hover:text-blue-600"
+                }`}
             >
               {cat}
             </button>
           ))}
         </div>
+      </section>
 
-        {/* FILTERED RESULT */}
-{filtered.length === 0 ? (
-  <div className="text-center py-20 bg-white rounded-xl shadow-sm border border-blue-200">
-  <p className="text-blue-900 text-xl font-bold">
-    No projects found in “{active}” category
-  </p>
-  <p className="text-blue-600 mt-2">
-    We are still updating this portfolio. Please check again soon.
-  </p>
-</div>
+      {/* ── GRID ── */}
+      <section className="max-w-7xl mx-auto px-6 py-12">
 
-) : (
- <div className="masonry">
-    {filtered.slice(0, visibleCount).map((project, idx) => (
-      <ProjectCard
-        key={idx}
-        project={project}
-        setSelectedImage={setSelectedImage}
-      />
-    ))}
-  </div>
-)}
+        {filtered.length === 0 ? (
+          <EmptyState category={active} />
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.slice(0, visibleCount).map((project, idx) => (
+                <ProjectCard
+                  key={`${project.title}-${idx}`}
+                  project={project}
+                  onImageClick={setSelectedImage}
+                />
+              ))}
+            </div>
 
-
-        {/* MASONRY GRID */}
-        {/* <div className="masonry">
-          {filtered.slice(0, visibleCount).map((project, idx) => (
-            <ProjectCard key={idx} project={project} setSelectedImage={setSelectedImage} />
-          ))}
-        </div> */}
-
-        {/* LOAD MORE BUTTON */}
-        {visibleCount < filtered.length && (
-          <div className="text-center mt-10">
-            <button
-              onClick={loadMore}
-              className="px-8 py-4 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition"
-            >
-              Load More
-            </button>
-          </div>
+            {visibleCount < filtered.length && (
+              <div className="text-center mt-12">
+                <button
+                  onClick={() => setVisibleCount((c) => c + 6)}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-blue-600 text-white text-sm font-bold rounded-full shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all duration-200"
+                >
+                  Load More Projects
+                  <ArrowUpRight size={16} />
+                </button>
+              </div>
+            )}
+          </>
         )}
+      </section>
 
-        {/* LIGHTBOX */}
-     {selectedImage && (
-  <div
-    className="fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]"
-    onClick={() => setSelectedImage(null)} // closes when clicking outside
-  >
-    {/* Prevent closing when clicking the image itself */}
-    <div
-      className="relative"
-      onClick={(e) => e.stopPropagation()} // <-- IMPORTANT
-    >
-      {/* Close Button */}
-      <button
-        className="absolute top-3 md:top-5 md:right-6 right-2 bg-black/60 p-2 rounded-full text-white z-[10000] hover:bg-black/80"
-        onClick={() => setSelectedImage(null)}
-      >
-        <X size={32} />
-      </button>
-
-      {/* Image */}
-      <img
-        src={selectedImage}
-        className="max-h-[70vh] max-w-[90vw] rounded-xl shadow-2xl"
-        alt="Preview"
-      />
-    </div>
-  </div>
-)}
-
-      </div>
+      {/* ── LIGHTBOX ── */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black/75 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div
+            className="relative max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute -top-4 -right-4 z-10 bg-white rounded-full p-2 shadow-xl hover:bg-slate-50 transition"
+            >
+              <X size={20} className="text-slate-700" />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Project preview"
+              className="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-// ---------------------------------
-// PROJECT CARD + CAROUSEL
-// ---------------------------------
+// ─── PROJECT CARD ─────────────────────────────────────────────────────────────
 
-function ProjectCard({ project, setSelectedImage }) {
+function ProjectCard({ project, onImageClick }) {
   const [index, setIndex] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const total = project.images.length;
+  const catStyle = CATEGORY_STYLES[project.category] ?? CATEGORY_STYLES["Welding"];
 
-  // auto-slide
+  // auto-slide only while not hovered
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % project.images.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [project.images.length]);
+    if (hovered || total <= 1) return;
+    const t = setInterval(() => setIndex((i) => (i + 1) % total), 3500);
+    return () => clearInterval(t);
+  }, [hovered, total]);
 
-  const prev = () =>
-    setIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
-
-  const next = () =>
-    setIndex((prev) => (prev + 1) % project.images.length);
+  const prev = (e) => {
+    e.stopPropagation();
+    setIndex((i) => (i - 1 + total) % total);
+  };
+  const next = (e) => {
+    e.stopPropagation();
+    setIndex((i) => (i + 1) % total);
+  };
 
   return (
-    <div className="mb-6 break-inside-avoid bg-white rounded-2xl shadow-xl border border-blue-100 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ">
+    <article
+      className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-100/60 hover:-translate-y-1 transition-all duration-300"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* ── image carousel ── */}
+      <div className="relative h-52 overflow-hidden bg-slate-100">
 
-      {/* CAROUSEL */}
-      <div className="relative h-56 overflow-hidden group">
-
-        {/* IMAGES */}
         <img
           src={project.images[index]}
-          className="w-full h-full object-cover cursor-pointer transition"
-          onClick={() => setSelectedImage(project.images[index])}
+          alt={project.title}
+          className="w-full h-full object-cover cursor-zoom-in transition-transform duration-500 group-hover:scale-[1.04]"
+          onClick={() => onImageClick(project.images[index])}
         />
 
-        {/* ARROWS */}
-        <button
-          onClick={prev}
-          className="hidden group-hover:flex absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full"
-        >
-          <ChevronLeft size={24} />
-        </button>
+        {/* gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
 
-        <button
-          onClick={next}
-          className="hidden group-hover:flex absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full"
-        >
-          <ChevronRight size={24} />
-        </button>
+        {/* category badge */}
+        <span className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${catStyle.bg} ${catStyle.text}`}>
+          <span className={`w-1.5 h-1.5 rounded-full ${catStyle.dot}`} />
+          {project.category}
+        </span>
+
+        {/* image counter */}
+        {total > 1 && (
+          <span className="absolute top-3 right-3 text-[11px] font-semibold bg-black/40 text-white px-2 py-0.5 rounded-full backdrop-blur-sm">
+            {index + 1} / {total}
+          </span>
+        )}
+
+        {/* nav arrows — visible on hover */}
+        {total > 1 && (
+          <>
+            <button
+              onClick={prev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-700 p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={next}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-700 p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </>
+        )}
+
+        {/* dot indicators */}
+        {total > 1 && (
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+            {project.images.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); setIndex(i); }}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
+                  i === index ? "bg-white w-4" : "bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* CONTENT */}
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm bg-blue-600 text-white px-3 py-1 rounded-full">
-            {project.category}
-          </span>
-          <span className="text-sm text-blue-700">{project.location}</span>
+      {/* ── card body ── */}
+      <div className="p-5">
+
+        {/* location */}
+        <div className="flex items-center gap-1 text-xs text-slate-400 font-medium mb-2">
+          <MapPin size={11} />
+          {project.location}
         </div>
 
-        <h3 className="text-xl font-bold text-blue-900 mb-2">
+        <h3 className="text-base font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-700 transition-colors duration-200">
           {project.title}
         </h3>
 
-        <p className="text-blue-700 mb-4 leading-relaxed">
+        <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">
           {project.description}
         </p>
 
-        <a href="#" className="text-blue-600 font-semibold hover:underline">
-          View Details →
-        </a>
+        {/* footer row */}
+        <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <WhatsAppButton />
+          <Link href={`/projects/${project.url}`} className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">
+            View details <ArrowUpRight size={13} />
+          </Link>
+        </div>
       </div>
-      <WhatsAppButton />
-    </div>
+    </article>
   );
 }
 
+// ─── EMPTY STATE ──────────────────────────────────────────────────────────────
+
+function EmptyState({ category }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-24 text-center">
+      <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+        <span className="text-2xl">🔧</span>
+      </div>
+      <h3 className="text-xl font-bold text-slate-800 mb-2">
+        No projects in &ldquo;{category}&rdquo; yet
+      </h3>
+      <p className="text-sm text-slate-400 max-w-xs">
+        We&apos;re updating this portfolio regularly — check back soon or browse another category.
+      </p>
+    </div>
+  );
+}
