@@ -17,6 +17,9 @@ export const metadata = {
     default:  "ODIMS Welding & Automation",
     template: "%s | ODIMS Welding & Automation",
   },
+    verification: {
+    google: 'kgFwFKhSYKA43xcrCNhadjmaV2x2DeoxPqYfaTKayss'
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "16x16", type: "image/png" },
