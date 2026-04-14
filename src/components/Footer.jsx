@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { navLinks } from "@/data/navigation";
 
 import { faFacebook, faLinkedin, faSquareLinkedin, faTwitterSquare } from "@fortawesome/free-brands-svg-icons";
 import { faCircleArrowRight, faEnvelope, faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
@@ -21,11 +22,14 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="font-semibold text-white mb-2">Quick Links</h4>
-          <ul className="space-y-1">
-            <li><Link href="/services" className="hover:underline">Services</Link></li>
-            <li><Link href="/service-areas" className="hover:underline">Service Areas</Link></li>
-            <li><Link href="/quote" className="hover:underline">Request a Quote</Link></li>
-          </ul>
+           <ul className="space-y-1">
+             {navLinks.map((link) => (
+               <li key={link.href}><Link href={link.href} className="hover:underline">{link.label}</Link></li>
+             ))}
+             <li><Link href="/service-areas" className="hover:underline">Service Areas</Link></li>
+             <li><Link href="/quote" className="hover:underline">Request a Quote</Link></li>
+           </ul>
+
         </div>
         <div>
           <h4 className="font-semibold text-white mb-2">Contact</h4>

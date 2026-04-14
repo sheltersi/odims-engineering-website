@@ -476,13 +476,11 @@ function RelatedCard({ project }) {
         <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-700 transition-colors leading-snug">
           {project.title}
         </h3>
-        <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-500 group-hover:text-blue-700 transition-colors">
-           <Link href={`/projects/${project.url}`} className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">
+         <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors">
             View details <ArrowUpRight size={13} />
-          </Link>
+         </span>
+       </div>
 
-        </span>
-      </div>
     </Link>
   );
 }

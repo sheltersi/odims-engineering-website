@@ -4,17 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/projects", label: "Projects" },
-  // { href: "/pricing", label: "Pricing" },
-  { href: "/reviews", label: "Reviews" },
-   { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
-    { href: "/blog", label: "Blog" },
-];
+import { navLinks } from "@/data/navigation";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -29,7 +19,8 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <div className="h-16 w-16 rounded-xl bg-brand.blue text-white flex items-center justify-center text-sm font-bold">
-            <img src="assets/img/favicon.png" alt="icon" className="w-16 h-16" />
+             <img src="/assets/img/favicon.png" alt="icon" className="w-16 h-16" />
+
           </div>
 
           <div className="leading-tight">
