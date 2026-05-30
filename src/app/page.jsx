@@ -15,41 +15,28 @@ export default function Home() {
       {/* HERO */}
     <Hero />
 
-  <Section className="bg-[#040404] text-white relative overflow-hidden">
+      {/* SERVICES */}
+      <Section >
+      {/* <div className="text-center flex flex-col items-center"> */}
+     <div className="relative py-20">
+  {/* Blue Shapes */}
+  <div className="absolute top-0 left-10 w-40 h-40 bg-blue-300 rounded-full blur-2xl  opacity-60"></div>
+  <div className="absolute bottom-0 right-10 w-56 h-56 bg-blue-300 rounded-full blur-2xl opacity-50"></div>
+  <div className="absolute top-20 right-32 w-24 h-24 bg-blue-300 rounded-full blur-2xl  opacity-40"></div>
 
-  {/* Industrial Glow Accents (subtle, not playful) */}
-  <div className="absolute top-10 left-10 w-40 h-40 bg-[#C5620B]/10 rounded-full blur-3xl"></div>
-  <div className="absolute bottom-10 right-10 w-56 h-56 bg-[#FCB861]/10 rounded-full blur-3xl"></div>
+  {/* Content */}
+  <div className="flex flex-col items-center text-center">
+    <h3 className="text-3xl font-mono font-bold">Our Solutions.</h3>
+    <hr className="border-4 w-[300px] border-[#7692FF] mb-4 mt-4" />
 
-  <div className="text-center py-20 max-w-3xl mx-auto">
-
-    {/* Kicker */}
-    <p className="text-[#FCB861] uppercase tracking-wider text-sm mb-3">
-      What We Do
+    <p className="text-blue-950 text-xl font-mono mt-8">
+      Automation solutions that keep your property secure and convenient.
     </p>
-
-    {/* Headline */}
-    <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
-      Reliable Gate & Welding
-      <br />
-      <span className="text-[#FCB861]">Solutions That Last</span>
-    </h2>
-
-    {/* Description */}
-    <p className="text-gray-400 text-lg leading-relaxed mb-4">
-      We design, install and repair gate systems, garage doors and custom
-      welding structures built for strength, security and long-term use.
+    <p className="font-mono text-xl pb-8">
+      From custom welding to Installation of electric and solar gates, we got you covered.
     </p>
-
-    <p className="text-gray-500 text-base">
-      From electric and solar gates to custom steel fabrication — we deliver
-      dependable solutions for homes and businesses.
-    </p>
-
-    {/* Accent Line */}
-    <div className="w-16 h-[3px] bg-[#C5620B] mx-auto mt-6"></div>
-
   </div>
+</div>
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 ">
           {services.map((service) => (

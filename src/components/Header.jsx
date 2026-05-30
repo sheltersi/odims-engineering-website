@@ -11,22 +11,26 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 bg-[#040404]/90 backdrop-blur-md border-b border-[#1a1a1a]">
+    // <header className="bg-[#E0E1E9] border-b border-slate-400 sticky top-0 z-50">
+    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-slate-200 shadow-sm">
 
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between py-4">
+      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between py-4 gap-6">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <img src="/assets/img/favicon.png" alt="logo" className="w-12 h-12" />
+        <Link href="/" className="flex items-center gap-2">
+          <div className="h-16 w-16 rounded-xl bg-brand.blue text-white flex items-center justify-center text-sm font-bold">
+             <img src="/assets/img/favicon.png" alt="icon" className="w-16 h-16" />
+
+          </div>
 
           <div className="leading-tight">
-            <div className="font-semibold text-white">ODiMs</div>
-            <div className="text-xs text-gray-400">Welding & Automation</div>
+            <div className="font-semibold text-slate-900">ODiMs</div>
+            <div className="text-xs text-slate-500">Welding & Automation</div>
           </div>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm">
+        <nav className="hidden md:flex items-center gap-5 text-sm">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
 
@@ -34,60 +38,50 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative transition ${
+                className={`transition ${
                   isActive
-                    ? "text-[#FCB861]"
-                    : "text-gray-300 hover:text-white"
+                    ? "text-brand.blue font-semibold border-b-2 border-brand.blue pb-1"
+                    : "text-black hover:text-brand.blue"
                 }`}
               >
                 {link.label}
-
-                {/* underline effect */}
-                <span
-                  className={`absolute left-0 -bottom-1 h-[2px] bg-[#C5620B] transition-all ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
-                ></span>
               </Link>
             );
           })}
         </nav>
 
-        {/* CTA */}
+        {/* Call button (desktop only) */}
         <div className="hidden md:block">
-          <a
-            href="tel:+27633264684"
-            className="bg-[#C5620B] hover:bg-[#FCB861] text-black px-4 py-2 rounded-lg text-sm font-medium transition-all shadow-md hover:shadow-lg"
-          >
+          <a href="tel:+27633264684" className="btn btn-primary text-xs md:text-sm">
             Call / WhatsApp
           </a>
         </div>
 
-        {/* Hamburger */}
+        {/* Hamburger (mobile only) */}
         <button
           className="md:hidden flex flex-col gap-1"
           onClick={() => setOpen(!open)}
         >
           {open ? (
-            <>
-              <span className="w-6 h-0.5 bg-white rotate-45 translate-y-1"></span>
-              <span className="w-6 h-0.5 bg-white -rotate-45 -translate-y-1"></span>
-            </>
+            <div className="flex flex-col items-center justify-center">
+              <span className="w-6 h-0.5 bg-black rotate-45 translate-y-0.5"></span>
+              <span className="w-6 h-0.5 bg-black -rotate-45 -translate-y-0.5"></span>
+            </div>
           ) : (
-            <>
-              <span className="w-6 h-0.5 bg-white"></span>
-              <span className="w-6 h-0.5 bg-white"></span>
-              <span className="w-6 h-0.5 bg-white"></span>
-            </>
+            <div className="flex flex-col gap-1">
+              <span className="w-6 h-0.5 bg-black"></span>
+              <span className="w-6 h-0.5 bg-black"></span>
+              <span className="w-6 h-0.5 bg-black"></span>
+            </div>
           )}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden bg-[#040404] border-t border-[#1a1a1a] px-4 pb-6">
+<div className="md:hidden bg-white/90 backdrop-blur-md border-t border-slate-200 px-4 pb-4 absolute left-0 right-0 top-full shadow-sm">
 
-          <nav className="flex flex-col gap-3 pt-4">
+          <nav className="flex flex-col gap-4 text-sm text-slate-700 py-4">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
 
@@ -96,10 +90,10 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className={`px-4 py-3 rounded-lg transition ${
+                  className={`py-2 ps-4 rounded-3xl ms-3 transition ${
                     isActive
-                      ? "bg-[#6A2B09] text-[#FCB861]"
-                      : "text-gray-300 hover:bg-[#1a1a1a]"
+                      ? "bg-brand.blue text-blue-500"
+                      : "text-black hover:bg-[#ABD2FA]"
                   }`}
                 >
                   {link.label}
@@ -107,10 +101,10 @@ export default function Header() {
               );
             })}
 
-            {/* CTA Mobile */}
+            {/* Call button on mobile */}
             <a
               href="tel:+27633264684"
-              className="mt-3 text-center bg-[#C5620B] hover:bg-[#FCB861] text-black px-4 py-3 rounded-lg font-medium transition"
+              className="btn btn-primary text-xs w-fit mt-2"
             >
               Call / WhatsApp
             </a>
