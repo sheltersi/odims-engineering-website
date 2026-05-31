@@ -72,7 +72,8 @@ const projects = [
       "Repaired and reprogrammed an electric sliding gate motor for optimal performance.",
   },
   {
-    title: "Steel Carport Welding Project",
+    url: "steel-carport-welding",
+    title: "Steel Carport Welding",
     images: [
       "/assets/projects/carport/work-1.png",
       "/assets/projects/carport/work-2.png",
