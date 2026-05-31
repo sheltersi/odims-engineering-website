@@ -3,31 +3,58 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-export default function ServiceCard({ title, short, href }) {
+const icons = {
+  "gate-fabrication": "🛡️",
+  "gate-motors": "⚡",
+  "gate-repairs": "🔧",
+  "remote-programming": "📡",
+  "garage-doors": "🚪",
+  "burglar-bars": "🔒",
+  carports: "🏗️",
+  "palisade-fencing": "⛓️",
+  welding: "🔥",
+  "mobile-welding-services": "📱",
+  "custom-steel-fabrication": "⚙️",
+  maintenance: "🔄",
+};
+
+export default function ServiceCard({ slug, title, short, href }) {
+  const icon = icons[slug] || "🔩";
+
   return (
-    <div className="group relative bg-white rounded-2xl border border-slate-100 shadow-sm p-6 hover:shadow-xl hover:shadow-blue-100/50 hover:-translate-y-1 transition-all duration-300 flex flex-col">
-      <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-5 group-hover:bg-blue-100 transition-colors">
-        <div className="w-6 h-6 rounded-full bg-blue-600/20 flex items-center justify-center">
-          <div className="w-3 h-3 rounded-full bg-blue-600" />
+    <Link
+      href={href}
+      className="group relative block h-72 rounded-2xl overflow-hidden bg-slate-800"
+    >
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,theme(colors.blue.800/20),transparent_60%)]" />
+
+      {/* Subtle accent circles */}
+      <div className="absolute -top-8 -right-8 w-32 h-32 border border-blue-500/10 rounded-full" />
+      <div className="absolute -bottom-6 -left-6 w-24 h-24 border border-blue-400/10 rounded-full" />
+
+      <div className="relative h-full flex flex-col justify-end p-6">
+        {/* Icon */}
+        <div className="absolute top-5 left-5 w-11 h-11 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-lg group-hover:scale-110 group-hover:bg-blue-500/25 transition-all duration-300">
+          {icon}
+        </div>
+
+        {/* Title - always visible at bottom */}
+        <h3 className="text-lg font-bold text-white leading-snug mb-1">
+          {title}
+        </h3>
+
+        {/* Description overlay on hover */}
+        <div className="overflow-hidden max-h-0 group-hover:max-h-32 transition-all duration-500 ease-in-out">
+          <p className="text-sm text-slate-300 leading-relaxed pt-2 border-t border-white/10">
+            {short}
+          </p>
+          <div className="flex items-center gap-1 text-xs font-semibold text-blue-400 mt-2">
+            Learn more <ArrowUpRight size={13} />
+          </div>
         </div>
       </div>
-
-      <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">
-        {title}
-      </h3>
-
-      <p className="text-sm text-slate-500 leading-relaxed mb-6 flex-1">
-        {short}
-      </p>
-
-      {href && (
-        <Link
-          href={href}
-          className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors mt-auto"
-        >
-          Learn more <ArrowUpRight size={14} />
-        </Link>
-      )}
-    </div>
+    </Link>
   );
 }
