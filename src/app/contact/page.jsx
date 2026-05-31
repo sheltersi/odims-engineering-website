@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Swal from "sweetalert2";
 
 import ServicesMap from "@/components/ServicesAreaMap";
@@ -30,7 +30,30 @@ const services = [
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [files, setFiles] = useState([]);
+  const [previews, setPreviews] = useState([]);
+  const fileInputRef = useRef(null);
+
+  function handleFileChange(e) {
+    const selected = Array.from(e.target.files);
+    setFiles(selected);
+    previews.forEach((url) => URL.revokeObjectURL(url));
+    const urls = selected.map((file) => URL.createObjectURL(file));
+    setPreviews(urls);
+  }
+
+  function removeImage(index) {
+    URL.revokeObjectURL(previews[index]);
+    const newFiles = files.filter((_, i) => i !== index);
+    const newPreviews = previews.filter((_, i) => i !== index);
+    setFiles(newFiles);
+    setPreviews(newPreviews);
+    if (fileInputRef.current) {
+      const dt = new DataTransfer();
+      newFiles.forEach((f) => dt.items.add(f));
+      fileInputRef.current.files = dt.files;
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -46,8 +69,7 @@ export default function ContactPage() {
       phone: formData.get("phone")?.trim(),
       service: formData.get("service"),
       message: formData.get("message")?.trim(),
-      file_url: null, // we will fill this if a file exists
-
+      file_urls: [],
     };
 
     
@@ -87,21 +109,19 @@ export default function ContactPage() {
     // File upload code
     // -----------------------
 
-    const file = formData.get("attachment");
+    if (files.length > 0) {
+      for (const file of files) {
+        const fileName = `${Date.now()}-${file.name}`;
+        const { data, error: uploadError } = await supabase.storage
+          .from("contact-uploads")
+          .upload(fileName, file);
 
-    if (file && file.size > 0) {
-      const fileName = `${Date.now()}-${file.name}`;
+        if (uploadError) {
+          throw new Error(`File upload failed: ${uploadError.message}`);
+        }
 
-      const { data, error: uploadError } = await supabase.storage
-        .from("contact-uploads")
-        .upload(fileName, file);
-
-      if (uploadError) {
-        throw new Error("File upload failed");
+        payload.file_urls.push(data.path);
       }
-
-      // Save file path to payload
-      payload.file_url = data.path;
     }
 
       // -----------------------
@@ -156,11 +176,15 @@ export default function ContactPage() {
       });
 
       form.reset();
+      setFiles([]);
+      previews.forEach((url) => URL.revokeObjectURL(url));
+      setPreviews([]);
     } catch (err) {
+      console.error("Contact form error:", err);
       Swal.fire({
         icon: "error",
         title: "Something went wrong",
-        text: "Please try again later or contact us directly.",
+        text: err.message || "Please try again later or contact us directly.",
       });
     } finally {
       setLoading(false);
@@ -313,14 +337,37 @@ export default function ContactPage() {
               {/* image upload */}
               <div>
                 <label className="block font-medium text-blue-900 mb-1">
-                  Upload Image (optional)
+                  Upload Images (optional)
                 </label>
                 <input
                   type="file"
                   name="attachment"
+                  ref={fileInputRef}
+                  multiple
                   accept="image/*"
-                  className="w-full text-sm rounded-lg border border-blue-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={handleFileChange}
+                  className="w-full text-sm rounded-lg border border-blue-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200"
                 />
+                {previews.length > 0 && (
+                  <div className="grid grid-cols-3 gap-3 mt-4">
+                    {previews.map((url, i) => (
+                      <div key={url} className="relative group rounded-lg overflow-hidden border border-blue-100">
+                        <img
+                          src={url}
+                          alt={`Preview ${i + 1}`}
+                          className="w-full h-24 object-cover"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeImage(i)}
+                          className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Message */}
@@ -374,6 +421,22 @@ export default function ContactPage() {
         </div>
       </div>
       <WhatsAppButton />
+
+      {/* Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-blue-950/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl p-10 flex flex-col items-center gap-5 max-w-sm mx-4">
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 rounded-full border-4 border-blue-100"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-[#59A5D8] animate-spin"></div>
+            </div>
+            <p className="text-lg font-semibold text-blue-900">Sending Your Message</p>
+            <p className="text-sm text-[#6E7A85] text-center">
+              Uploading files and sending your request. This will only take a moment.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
