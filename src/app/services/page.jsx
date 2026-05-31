@@ -24,69 +24,61 @@ export default function ServicesPage() {
 };
   return (
     <>
-    <Section>
+    <section className="relative py-20 md:py-28 overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,theme(colors.blue.800/30),transparent_50%),radial-gradient(ellipse_at_bottom_left,theme(colors.blue.900/40),transparent_50%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
-     {/* Blue Shapes */}
-   <div className="absolute w-40 h-40 md:left-120 left-20 top-50 bg-blue-300/20 rotate-45"></div>
-      <div className="absolute w-40 h-40 md:left-160 left-55 top-50 bg-blue-300/20 rotate-45"></div>
-      <div className="absolute w-40 h-40 md:left-200 left-95 top-50 bg-blue-300/20 rotate-45"></div>
+        <div className="relative max-w-6xl mx-auto px-4">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-blue-400 uppercase mb-4">
+              <span className="w-6 h-px bg-blue-500 inline-block" />
+              What We Do
+            </span>
+            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.1]">
+              Our <span className="text-blue-400">Services</span>
+            </h1>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-center text-slate-400 mt-4 text-lg">
+                We provide a full range of services for gates, gate motors, remotes, garage doors and custom
+                welding projects.
+              </p>
+            </div>
+          </div>
 
-    <div className="flex flex-col items-center relative py-20">
+          <motion.div
+            variants={blockFade}
+            className="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {services.map((service) => (
+              <ServiceCard key={service.slug} {...service} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-
-    {/* <motion.h2
-    className="text-[#7692FF] font-mono text-3xl font-extrabold"
-    initial="hidden"
-    animate="visible"
-    variants={fadeIn}
-    transition={{ duration: 0.6 }}
-  >
-      Our Services
-    </motion.h2>
-    <hr className="border-4 w-[200px] border-[#3D518C] mb-4 mt-4" />
-     */}
-        <div className="text-center mb-12 pb-12">
-          <h1 className="text-4xl md:text-5xl font-bold font-mono text-blue-900">
-            Our <span className="text-[#59A5D8]">Services</span>
-          </h1>
-
-  <div className="max-w-2xl mx-auto">
-    <p className="text-center text-[#6E7A85] mt-4 font-mono text-lg">
-             We provide a full range of services for gates, gate motors, remotes, garage doors and custom
-        welding projects.
-    </p>
-  </div>
-    </div>
-</div>
-
-
-  <motion.div
-      variants={blockFade}
-      className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mt-4"
-      initial="hidden"
-      whileInView="visible"
-      transition={{ duration: 0.5, delay: 0.1 }}
-    >
-        {services.map((service) => (
-          <ServiceCard key={service.slug} {...service} />
-        ))}
-     </motion.div>
-    </Section>
-         <Section className="bg-slate-100" title="Ready to secure and automate your home?">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                <p className="text-slate-700">
-                  Tell us what you need, send a quick photo of your gate or garage door, and we’ll send you
-                  a free quote.
-                </p>
-                <div className="flex gap-3">
-                  <Button href="/quote">Get a Free Quote</Button>
-                  <Button href="/services" variant="outline">
-                    Contact Us
-                  </Button>
-                </div>
-              </div>
-            </Section>
-            <WhatsAppButton />
-            </>
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900" />
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight mb-6">
+            Ready to secure &amp; automate your home?
+          </h2>
+          <p className="text-blue-100 text-lg max-w-2xl mx-auto mb-8">
+            Tell us what you need, send a quick photo of your gate or garage door, and we&apos;ll send you a free quote.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button href="/quote" className="bg-white text-blue-700 hover:bg-blue-50 font-bold px-8 py-4 text-base shadow-xl shadow-blue-900/20">
+              Get a Free Quote
+            </Button>
+            <Button href="/contact" variant="outline" className="border-white/40 text-white hover:bg-white/10 font-bold px-8 py-4 text-base">
+              Contact Us
+            </Button>
+          </div>
+        </div>
+      </section>
+      <WhatsAppButton />
+    </>
   );
 }

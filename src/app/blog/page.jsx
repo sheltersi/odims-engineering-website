@@ -35,14 +35,16 @@ const blogPosts = [
 
 export default function BlogPage() {
   return (
-    <section className="bg-[#F5F7FA] min-h-screen">
+    <section className="min-h-screen">
       {/* HERO */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
+      <div className="relative overflow-hidden bg-slate-900 text-white py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,theme(colors.blue.800/30),transparent_50%),radial-gradient(ellipse_at_bottom_left,theme(colors.blue.900/40),transparent_50%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
             Our Blog
           </h1>
-          <p className="text-lg text-blue-100 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
             Insights, guides, and industry updates from our engineering
             and automation experts.
           </p>
@@ -50,7 +52,7 @@ export default function BlogPage() {
       </div>
 
       {/* BLOG GRID */}
-      <div className="max-w-6xl mx-auto px-4 py-16">
+      <div className="max-w-6xl mx-auto px-4 py-16 bg-gradient-to-b from-white to-blue-50">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
             <article

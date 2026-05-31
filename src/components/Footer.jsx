@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#091540] text-slate-300">
+    <footer className="bg-slate-900 text-slate-300">
      {/* <div className="absolute rotate-120 bottom-0 top-5 w-22 h-50 bg-blue-400/10 rounded-full"></div>
       <div className="absolute rotate-120 md:right-320 right-96 -bottom-101 w-22 h-120 bg-blue-400/10 rounded-full"></div>
       <div className="absolute rotate-120 md:right-320 right-96 -bottom-130 w-22 h-120 bg-blue-400/10 rounded-full"></div> */}
@@ -34,19 +34,19 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-white mb-2">Contact</h4>
             <div className="flex items-center gap-2">
-                <div className="bg-[#84D2F6] text-white p-2 rounded-full">
+                <div className="bg-blue-600 text-white p-2 rounded-full">
                   <FontAwesomeIcon icon={faPhone} />
                 </div>
                   <p className="">+27 63 326 4684</p>
               </div>
               <div className="flex items-center gap-2 mt-2">
-                <div className="bg-[#84D2F6] text-white p-2 rounded-full">
+                <div className="bg-blue-600 text-white p-2 rounded-full">
                   <FontAwesomeIcon icon={faEnvelope} />
                 </div>
                   <p className=""> info@odims.co.za</p>
               </div>
                 <div className="flex items-center gap-2 mt-2">
-                <div className="bg-[#84D2F6] text-white p-2 rounded-full">
+                <div className="bg-blue-600 text-white p-2 rounded-full">
                   <FontAwesomeIcon icon={faLocationDot} />
                 </div>
                  <p> 4 Heelra Rd, Raumaraispark, Johannesburg 2090, South Africa
@@ -64,14 +64,14 @@ export default function Footer() {
   
 
   {/* Bottom */}
-        <div className="md:mx-36 mt-16 mb-10 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="md:mx-36 mt-16 mb-10 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
       
           <p className="text-gray-500 text-sm">
   © {new Date().getFullYear()} Odims Welding & Automation. All rights reserved. </p> 
   <p className="text-gray-500 text-sm">Designed & Developed By{" "}
   <a
     href="https://sheltersibanda.com/"
-    className="text-sky-500"
+    className="text-blue-400 hover:text-blue-300"
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -80,8 +80,8 @@ export default function Footer() {
 </p>
 
           <div className="flex gap-6 text-sm">
-            <Link href="/privacy-policy" className="text-gray-500 hover:text-sky-500 transition-colors">Privacy Policy</Link>
-            <a href="/terms-of-service" className="text-gray-500 hover:text-sky-500 transition-colors">Terms of Service</a>
+            <Link href="/privacy-policy" className="text-gray-500 hover:text-blue-400 transition-colors">Privacy Policy</Link>
+            <a href="/terms-of-service" className="text-gray-500 hover:text-blue-400 transition-colors">Terms of Service</a>
           </div>
         </div>
 

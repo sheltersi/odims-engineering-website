@@ -18,7 +18,7 @@ export default function Header() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="h-16 w-16 rounded-xl bg-brand.blue text-white flex items-center justify-center text-sm font-bold">
+          <div className="h-16 w-16 rounded-xl bg-blue-600 text-white flex items-center justify-center text-sm font-bold">
              <img src="/assets/img/favicon.png" alt="icon" className="w-16 h-16" />
 
           </div>
@@ -40,8 +40,8 @@ export default function Header() {
                 href={link.href}
                 className={`transition ${
                   isActive
-                    ? "text-brand.blue font-semibold border-b-2 border-brand.blue pb-1"
-                    : "text-black hover:text-brand.blue"
+                    ? "text-blue-600 font-semibold border-b-2 border-blue-600 pb-1"
+                    : "text-slate-700 hover:text-blue-600"
                 }`}
               >
                 {link.label}
@@ -52,7 +52,7 @@ export default function Header() {
 
         {/* Call button (desktop only) */}
         <div className="hidden md:block">
-          <a href="tel:+27633264684" className="btn btn-primary text-xs md:text-sm">
+          <a href="tel:+27633264684" className="inline-flex items-center justify-center rounded-lg px-4 py-2.5 bg-blue-600 text-white text-xs md:text-sm font-medium hover:bg-blue-700 transition-all">
             Call / WhatsApp
           </a>
         </div>
@@ -92,8 +92,8 @@ export default function Header() {
                   onClick={() => setOpen(false)}
                   className={`py-2 ps-4 rounded-3xl ms-3 transition ${
                     isActive
-                      ? "bg-brand.blue text-blue-500"
-                      : "text-black hover:bg-[#ABD2FA]"
+                      ? "bg-blue-600 text-white"
+                      : "text-slate-700 hover:bg-blue-100"
                   }`}
                 >
                   {link.label}
@@ -104,7 +104,7 @@ export default function Header() {
             {/* Call button on mobile */}
             <a
               href="tel:+27633264684"
-              className="btn btn-primary text-xs w-fit mt-2"
+              className="inline-flex items-center justify-center rounded-lg px-4 py-2.5 bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-all w-fit mt-2"
             >
               Call / WhatsApp
             </a>

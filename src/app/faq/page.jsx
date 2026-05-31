@@ -47,45 +47,36 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-16 relative overflow-hidden">
-
-      {/* Background abstract shapes */}
-      <div className="absolute top-0 left-20 w-72 h-72 bg-blue-300/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-2xl"></div>
-   
-   <div className="absolute w-40 h-40 md:left-120 left-20 bg-blue-300/20 rotate-45"></div>
-      <div className="absolute w-40 h-40 md:left-160 left-55 bg-blue-300/20 rotate-45"></div>
-      <div className="absolute w-40 h-40 md:left-200 left-95 bg-blue-300/20 rotate-45"></div>
-
-      <div className="max-w-4xl mx-auto relative z-10">
-
-        {/* HEADER */}
-          <div className="text-center mb-12 pb-12">
-          <h1 className="text-4xl md:text-5xl font-bold font-mono text-blue-900">
-            Frequently Asked <span className="text-[#59A5D8]">Questions</span>
+    <div className="min-h-screen bg-white">
+      {/* HERO HEADER */}
+      <section className="relative py-20 overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,theme(colors.blue.800/30),transparent_50%),radial-gradient(ellipse_at_bottom_left,theme(colors.blue.900/40),transparent_50%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+            Frequently Asked <span className="text-blue-400">Questions</span>
           </h1>
-
-  <div className="max-w-2xl mx-auto">
-    <p className="text-center text-[#6E7A85] mt-4 font-mono text-lg">
+          <p className="text-slate-400 mt-4 text-lg max-w-2xl mx-auto">
             Find quick answers to the most common questions from our customers.
-    </p>
-  </div>
-</div>
+          </p>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto px-4 py-16">
 
         {/* FAQ ACCORDION */}
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white border border-blue-200 rounded-xl shadow-md p-5">
+            <div key={index} className="bg-white border border-slate-200 rounded-xl shadow-sm p-5">
               
-              {/* Question Row */}
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex items-center justify-between text-left"
               >
-                <span className="text-blue-900 font-semibold text-lg">{faq.question}</span>
+                <span className="text-slate-900 font-semibold text-lg">{faq.question}</span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className={`text-blue-700 transition-transform duration-300 ${
+                  className={`text-blue-500 transition-transform duration-300 ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                 />

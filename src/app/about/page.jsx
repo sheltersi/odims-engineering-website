@@ -19,26 +19,21 @@ export default function AboutPage() {
   };
 
   return (
-    <main className="bg-gradient-to-b from-gray-50 to-white">
-
-       {/* Blue Shapes */}
-   <div className="absolute w-40 h-40 md:left-120 left-20 top-50 bg-blue-300/20 rotate-45"></div>
-      <div className="absolute w-40 h-40 md:left-160 left-55 top-50 bg-blue-300/20 rotate-45"></div>
-      <div className="absolute w-40 h-40 md:left-200 left-95 top-50 bg-blue-300/20 rotate-45"></div>
-
+    <main className="bg-gradient-to-b from-white to-blue-50">
 
       {/* ================= HERO ================= */}
-      <section className="relative flex flex-col items-center py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-blue-600/10"></div>
+      <section className="relative flex flex-col items-center py-24 overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,theme(colors.blue.800/30),transparent_50%),radial-gradient(ellipse_at_bottom_left,theme(colors.blue.900/40),transparent_50%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 font-mono">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-4xl md:text-5xl font-extrabold max-w-3xl font-mono"
+            className="text-4xl md:text-5xl font-black text-white tracking-tight max-w-3xl"
           >
-            <span className=" Precision & Trust">Built on Strength,</span><span className="text-[#59A5D8]"> Precision & Trust</span>
+            Built on Strength, <span className="text-blue-400">Precision &amp; Trust</span>
           </motion.h1>
 
           <motion.p
@@ -46,7 +41,7 @@ export default function AboutPage() {
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.1 }}
-            className="mt-6 text-lg text-gray-700 max-w-3xl"
+            className="mt-6 text-lg text-slate-300 max-w-3xl"
           >
             ODiMs Welding & Automation is a South African-based company specialising in
             gates, steel fabrication, welding, automation and security solutions for
@@ -65,16 +60,16 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl font-bold text-slate-900 mb-6">
               Our Story
             </h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
+            <p className="text-slate-600 leading-relaxed mb-4">
               What started as a hands-on welding service grew into a full-scale
               fabrication and automation business. We saw the need for reliable,
               well-built gates, strong steel structures, and secure automation systems
               that actually last.
             </p>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-slate-600 leading-relaxed">
               Today, we combine skilled workmanship, quality materials and practical
               experience to deliver solutions that are not just functional — but built
               to stand the test of time.
@@ -87,9 +82,9 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200"
+            className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200"
           >
-            <ul className="space-y-4 text-gray-700">
+            <ul className="space-y-4 text-slate-700">
               <li className="flex items-center gap-3">
                 <Hammer className="text-blue-600" /> Skilled steel & welding experts
               </li>
@@ -109,7 +104,7 @@ export default function AboutPage() {
       </section>
 
       {/* ================= VALUES ================= */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 bg-blue-50/60">
         <div className="max-w-7xl mx-auto px-6">
 
           <motion.h2
@@ -117,7 +112,7 @@ export default function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-3xl font-bold text-center text-gray-900 mb-12"
+            className="text-3xl font-bold text-center text-slate-900 mb-12"
           >
             What We Stand For
           </motion.h2>
@@ -155,9 +150,9 @@ export default function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-gray-900"
+            className="text-3xl md:text-4xl font-bold text-slate-900"
           >
-            Let’s Build Something Strong Together
+            Let&rsquo;s Build Something Strong Together
           </motion.h2>
 
           <motion.p
@@ -166,7 +161,7 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-gray-700 max-w-2xl mx-auto"
+            className="mt-4 text-slate-600 max-w-2xl mx-auto"
           >
             Whether you need a new gate, automation, welding repairs or custom steel
             fabrication — we’re ready to help.
@@ -211,15 +206,15 @@ function ValueCard({ icon, title, text }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 text-center"
+      className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200 text-center"
     >
       <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-blue-100 text-blue-600">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold text-gray-900 mb-3">
+      <h3 className="text-xl font-semibold text-slate-900 mb-3">
         {title}
       </h3>
-      <p className="text-gray-700">
+      <p className="text-slate-600">
         {text}
       </p>
     </motion.div>

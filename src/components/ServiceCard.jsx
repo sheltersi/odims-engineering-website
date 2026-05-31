@@ -45,12 +45,12 @@ export default function ServiceCard({ slug, title, short, href }) {
           {title}
         </h3>
 
-        {/* Description overlay on hover */}
-        <div className="overflow-hidden max-h-0 group-hover:max-h-32 transition-all duration-500 ease-in-out">
-          <p className="text-sm text-slate-300 leading-relaxed pt-2 border-t border-white/10">
+        {/* Description always visible */}
+        <div>
+          <p className="text-sm text-slate-300 leading-relaxed pt-2 border-t border-white/10 line-clamp-3">
             {short}
           </p>
-          <div className="flex items-center gap-1 text-xs font-semibold text-blue-400 mt-2">
+          <div className="flex items-center gap-1 text-xs font-semibold text-blue-400 mt-3">
             Learn more <ArrowUpRight size={13} />
           </div>
         </div>

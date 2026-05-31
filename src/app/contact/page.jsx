@@ -192,28 +192,22 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-16 relative overflow-hidden">
-      {/* Background abstract shapes */}
-      <div className="absolute top-10 left-20 w-80 h-80 bg-blue-300/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-2xl"></div>
-
-      <div className="absolute w-40 h-40 md:left-120 left-20 bg-blue-300/20 rotate-45"></div>
-      <div className="absolute w-40 h-40 md:left-160 left-55 bg-blue-300/20 rotate-45"></div>
-      <div className="absolute w-40 h-40 md:left-200 left-95 bg-blue-300/20 rotate-45"></div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* HEADER */}
-        <div className="text-center mb-12 pb-12">
-          <h1 className="text-4xl md:text-5xl font-bold font-mono text-blue-900">
-            Contact <span className="text-[#59A5D8]">Us</span>
+    <div className="min-h-screen bg-white">
+      {/* HERO HEADER */}
+      <section className="relative py-20 overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,theme(colors.blue.800/30),transparent_50%),radial-gradient(ellipse_at_bottom_left,theme(colors.blue.900/40),transparent_50%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-6xl mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+            Contact <span className="text-blue-400">Us</span>
           </h1>
-
-          <div className="max-w-2xl mx-auto">
-            <p className="text-center text-[#6E7A85] mt-4 font-mono text-lg">
-              We are here to help. Reach out anytime.
-            </p>
-          </div>
+          <p className="text-slate-400 mt-4 text-lg max-w-2xl mx-auto">
+            We are here to help. Reach out anytime.
+          </p>
         </div>
+      </section>
+
+      <div className="max-w-6xl mx-auto px-4 py-16">
 
         {/* MAIN GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -226,40 +220,40 @@ export default function ContactPage() {
             <div className="space-y-6">
               {/* Phone */}
               <div className="flex items-center gap-4">
-                <div className="bg-[#84D2F6] text-white p-3 rounded-full">
+                <div className="bg-blue-600 text-white p-3 rounded-full">
                   <FontAwesomeIcon icon={faPhone} />
                 </div>
                 <div>
-                  <p className="font-semibold text-blue-900">Phone Number</p>
-                  <p className="text-[#6E7A85]">+27 63 326 4684</p>
+                  <p className="font-semibold text-slate-900">Phone Number</p>
+                  <p className="text-slate-500">+27 63 326 4684</p>
                 </div>
               </div>
 
               {/* Email */}
               <div className="flex items-center gap-4">
-                <div className="bg-[#84D2F6] text-white p-3 rounded-full">
+                <div className="bg-blue-600 text-white p-3 rounded-full">
                   <FontAwesomeIcon icon={faEnvelope} />
                 </div>
                 <div>
-                  <p className="font-semibold text-blue-900">Email Address</p>
-                  <p className="text-[#6E7A85]">info@odims.co.za</p>
+                  <p className="font-semibold text-slate-900">Email Address</p>
+                  <p className="text-slate-500">info@odims.co.za</p>
                 </div>
               </div>
 
               {/* Location */}
               <div className="flex items-center gap-4">
-                <div className="bg-[#84D2F6] text-white p-3 rounded-full">
+                <div className="bg-blue-600 text-white p-3 rounded-full">
                   <FontAwesomeIcon icon={faLocationDot} />
                 </div>
                 <div>
-                  <p className="font-semibold text-blue-900">Our Location</p>
-                  <p className="text-[#6E7A85]">Johannesburg, South Africa</p>
+                  <p className="font-semibold text-slate-900">Our Location</p>
+                  <p className="text-slate-500">Johannesburg, South Africa</p>
                 </div>
               </div>
             </div>
 
             {/* Small Message */}
-            <p className="text-[#6E7A85] text-sm mt-10">
+            <p className="text-slate-500 text-sm mt-10">
               Our team replies within 1–12 hours. For urgent help, please call
               us directly.
             </p>
@@ -391,7 +385,7 @@ export default function ContactPage() {
                             ${
                               loading
                                 ? "bg-blue-400 cursor-not-allowed"
-                                : "bg-[#84D2F6] hover:bg-blue-700"
+                                : "bg-blue-600 hover:bg-blue-700"
                             }
                             text-white
                           `}
@@ -428,10 +422,10 @@ export default function ContactPage() {
           <div className="bg-white rounded-2xl shadow-2xl p-10 flex flex-col items-center gap-5 max-w-sm mx-4">
             <div className="relative w-16 h-16">
               <div className="absolute inset-0 rounded-full border-4 border-blue-100"></div>
-              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-[#59A5D8] animate-spin"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-500 animate-spin"></div>
             </div>
-            <p className="text-lg font-semibold text-blue-900">Sending Your Message</p>
-            <p className="text-sm text-[#6E7A85] text-center">
+            <p className="text-lg font-semibold text-slate-900">Sending Your Message</p>
+            <p className="text-sm text-slate-500 text-center">
               Uploading files and sending your request. This will only take a moment.
             </p>
           </div>
