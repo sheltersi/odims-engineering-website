@@ -25,7 +25,7 @@ const project = {
   location: "Nelspruit, Mpumalanga",
   category: "Welding",
   completedDate: "February 2024",
-  duration: "5 days",
+  duration: "3 days",
   images: [
     "/assets/projects/carport/work-1.png",
     "/assets/projects/carport/work-2.png",

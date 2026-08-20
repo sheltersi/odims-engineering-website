@@ -98,7 +98,7 @@ const CATEGORY_STYLES = {
 
 const stats = [
   { value: "340+", label: "Projects Done" },
-  { value: "12yr", label: "In the Trade" },
+  { value: "5yr", label: "In the Trade" },
   { value: "6",    label: "Provinces" },
   { value: "98%",  label: "Satisfaction" },
 ];

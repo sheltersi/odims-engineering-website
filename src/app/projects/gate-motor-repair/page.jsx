@@ -29,7 +29,7 @@ const project = {
   location: "Midrand, Gauteng",
   category: "Gate Motor",
   completedDate: "November 2023",
-  duration: "Half day",
+  duration: "Hours",
   images: [
     "/assets/projects/gate-motor/work-1.png",
     "/assets/projects/gate-motor/work-2.png",

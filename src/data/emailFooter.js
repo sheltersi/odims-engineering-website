@@ -23,8 +23,8 @@ export function emailFooter() {
 
       <tr>
         <td style="padding-bottom:6px;">
-          📞 <a href="tel:+27810713204" style="color:#2563eb;text-decoration:none;">
-            +27 81 071 3204
+          📞 <a href="tel:+27633264684" style="color:#2563eb;text-decoration:none;">
+            +27 63 326 4684
           </a>
         </td>
       </tr>

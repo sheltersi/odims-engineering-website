@@ -12,20 +12,20 @@ export default function Home() {
       <Hero />
 
       {/* ── SERVICES ── */}
-      <section className="relative py-20 md:py-28 overflow-hidden bg-slate-900">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,theme(colors.blue.800/30),transparent_50%),radial-gradient(ellipse_at_bottom_left,theme(colors.blue.900/40),transparent_50%)]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-200/30 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-blue-400 uppercase mb-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-blue-600 uppercase mb-4">
               <span className="w-6 h-px bg-blue-500 inline-block" />
               What We Do
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.1]">
-              Our <span className="text-blue-400">Solutions</span>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
+              Our <span className="text-blue-600">Solutions</span>
             </h2>
-            <p className="mt-4 text-slate-400 text-lg leading-relaxed">
+            <p className="mt-4 text-slate-500 text-lg leading-relaxed">
               From custom welding to smart gate automation, every service is built for durability, security, and style.
             </p>
           </div>
@@ -39,7 +39,7 @@ export default function Home() {
           <div className="text-center mt-10">
             <Button
               href="/services"
-              className="border-blue-500/50 text-blue-300 hover:bg-blue-500/10 font-semibold px-8 py-3"
+              className="border-blue-500/50 text-blue-600 hover:bg-blue-50 font-semibold px-8 py-3"
             >
               View All Services &rarr;
             </Button>

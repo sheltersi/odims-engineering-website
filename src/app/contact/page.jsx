@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 import ServicesMap from "@/components/ServicesAreaMap";
@@ -30,29 +30,40 @@ const services = [
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState([]);
-  const [previews, setPreviews] = useState([]);
-  const fileInputRef = useRef(null);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [videoFiles, setVideoFiles] = useState([]);
+  const [videoPreviews, setVideoPreviews] = useState([]);
+  const [selectedServices, setSelectedServices] = useState([]);
 
-  function handleFileChange(e) {
+  function toggleService(service) {
+    setSelectedServices((prev) =>
+      prev.includes(service) ? prev.filter((s) => s !== service) : [...prev, service]
+    );
+  }
+
+  function handleImageChange(e) {
     const selected = Array.from(e.target.files);
-    setFiles(selected);
-    previews.forEach((url) => URL.revokeObjectURL(url));
-    const urls = selected.map((file) => URL.createObjectURL(file));
-    setPreviews(urls);
+    setImageFiles([...imageFiles, ...selected]);
+    setImagePreviews([...imagePreviews, ...selected.map((file) => URL.createObjectURL(file))]);
+  }
+
+  function handleVideoChange(e) {
+    const selected = Array.from(e.target.files);
+    setVideoFiles([...videoFiles, ...selected]);
+    setVideoPreviews([...videoPreviews, ...selected.map((file) => URL.createObjectURL(file))]);
   }
 
   function removeImage(index) {
-    URL.revokeObjectURL(previews[index]);
-    const newFiles = files.filter((_, i) => i !== index);
-    const newPreviews = previews.filter((_, i) => i !== index);
-    setFiles(newFiles);
-    setPreviews(newPreviews);
-    if (fileInputRef.current) {
-      const dt = new DataTransfer();
-      newFiles.forEach((f) => dt.items.add(f));
-      fileInputRef.current.files = dt.files;
-    }
+    URL.revokeObjectURL(imagePreviews[index]);
+    setImageFiles(imageFiles.filter((_, i) => i !== index));
+    setImagePreviews(imagePreviews.filter((_, i) => i !== index));
+  }
+
+  function removeVideo(index) {
+    URL.revokeObjectURL(videoPreviews[index]);
+    setVideoFiles(videoFiles.filter((_, i) => i !== index));
+    setVideoPreviews(videoPreviews.filter((_, i) => i !== index));
   }
 
   async function handleSubmit(e) {
@@ -67,7 +78,7 @@ export default function ContactPage() {
       name: formData.get("name")?.trim(),
       email: formData.get("email")?.trim(),
       phone: formData.get("phone")?.trim(),
-      service: formData.get("service"),
+      service: selectedServices,
       message: formData.get("message")?.trim(),
       file_urls: [],
     };
@@ -81,7 +92,7 @@ export default function ContactPage() {
     if (
       !payload.name ||
       !payload.email ||
-      !payload.service ||
+      selectedServices.length === 0 ||
       !payload.message
     ) {
       Swal.fire({
@@ -109,8 +120,9 @@ export default function ContactPage() {
     // File upload code
     // -----------------------
 
-    if (files.length > 0) {
-      for (const file of files) {
+    const allFiles = [...imageFiles, ...videoFiles];
+    if (allFiles.length > 0) {
+      for (const file of allFiles) {
         const fileName = `${Date.now()}-${file.name}`;
         const { data, error: uploadError } = await supabase.storage
           .from("contact-uploads")
@@ -169,16 +181,20 @@ export default function ContactPage() {
       }).then((result) => {
         if (result.isConfirmed) {
           window.open(
-            `https://wa.me/27810713204?text=Hi%20ODiMs%20Team,%20I%20just%20sent%20a%20request%20for%20${payload.service}`,
+            `https://wa.me/27810713204?text=Hi%20ODiMs%20Team,%20I%20just%20sent%20a%20request%20for%20${payload.service.join(", ")}`,
             "_blank"
           );
         }
       });
 
       form.reset();
-      setFiles([]);
-      previews.forEach((url) => URL.revokeObjectURL(url));
-      setPreviews([]);
+      setSelectedServices([]);
+      imagePreviews.forEach((url) => URL.revokeObjectURL(url));
+      videoPreviews.forEach((url) => URL.revokeObjectURL(url));
+      setImageFiles([]);
+      setImagePreviews([]);
+      setVideoFiles([]);
+      setVideoPreviews([]);
     } catch (err) {
       console.error("Contact form error:", err);
       Swal.fire({
@@ -308,24 +324,36 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* service */}
+              {/* services */}
               <div>
-                <label className="block font-medium text-blue-900 mb-1">
+                <label className="block font-medium text-blue-900 mb-2">
                   Service Required
                 </label>
-
-                <select
-                  name="service"
-                  required
-                  className="w-full rounded-lg border border-blue-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Select a service</option>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {services.map((service) => (
-                    <option key={service} value={service}>
-                      {service}
-                    </option>
+                    <label
+                      key={service}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer transition-colors ${
+                        selectedServices.includes(service)
+                          ? "bg-blue-50 border-blue-400"
+                          : "border-blue-200 hover:border-blue-300"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedServices.includes(service)}
+                        onChange={() => toggleService(service)}
+                        className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                      />
+                      <span className="text-sm text-slate-700">{service}</span>
+                    </label>
                   ))}
-                </select>
+                </div>
+                {selectedServices.length > 0 && (
+                  <p className="text-xs text-blue-600 mt-2">
+                    {selectedServices.length} service{selectedServices.length > 1 ? "s" : ""} selected
+                  </p>
+                )}
               </div>
 
               {/* image upload */}
@@ -335,25 +363,55 @@ export default function ContactPage() {
                 </label>
                 <input
                   type="file"
-                  name="attachment"
-                  ref={fileInputRef}
                   multiple
                   accept="image/*"
-                  onChange={handleFileChange}
+                  onChange={(e) => { handleImageChange(e); e.target.value = ""; }}
                   className="w-full text-sm rounded-lg border border-blue-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200"
                 />
-                {previews.length > 0 && (
+                {imagePreviews.length > 0 && (
+                  <p className="text-xs text-blue-600 mt-1">{imagePreviews.length} image{imagePreviews.length > 1 ? "s" : ""} selected</p>
+                )}
+                {imagePreviews.length > 0 && (
                   <div className="grid grid-cols-3 gap-3 mt-4">
-                    {previews.map((url, i) => (
+                    {imagePreviews.map((url, i) => (
                       <div key={url} className="relative group rounded-lg overflow-hidden border border-blue-100">
-                        <img
-                          src={url}
-                          alt={`Preview ${i + 1}`}
-                          className="w-full h-24 object-cover"
-                        />
+                        <img src={url} alt={`Preview ${i + 1}`} className="w-full h-24 object-cover" />
                         <button
                           type="button"
                           onClick={() => removeImage(i)}
+                          className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* video upload */}
+              <div>
+                <label className="block font-medium text-blue-900 mb-1">
+                  Upload Videos (optional)
+                </label>
+                <input
+                  type="file"
+                  multiple
+                  accept="video/*"
+                  onChange={(e) => { handleVideoChange(e); e.target.value = ""; }}
+                  className="w-full text-sm rounded-lg border border-blue-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200"
+                />
+                {videoPreviews.length > 0 && (
+                  <p className="text-xs text-blue-600 mt-1">{videoPreviews.length} video{videoPreviews.length > 1 ? "s" : ""} selected</p>
+                )}
+                {videoPreviews.length > 0 && (
+                  <div className="grid grid-cols-3 gap-3 mt-4">
+                    {videoPreviews.map((url, i) => (
+                      <div key={url} className="relative group rounded-lg overflow-hidden border border-blue-100">
+                        <video src={url} className="w-full h-24 object-cover" controls />
+                        <button
+                          type="button"
+                          onClick={() => removeVideo(i)}
                           className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
                         >
                           ×
